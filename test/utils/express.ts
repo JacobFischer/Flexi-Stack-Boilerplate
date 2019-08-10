@@ -12,16 +12,25 @@ export const closeServer = (server: Server): Promise<void> => new Promise((resol
     });
 });
 
-export const newExpressServer = (
+/**
+ * Creates a new express server promise-ified.
+ *
+ * @param port - The port to bind the express server to
+ * @param withApp - Optional Express app HOC
+ * @returns A new express server.
+ */
+export async function newExpressServer(
     port: number,
     withApp?: (app: express.Application) => void | Promise<unknown>,
-): Promise<Server> => new Promise<Server>(async (resolve) => {
+): Promise<Server> {
     const app = express();
     if (withApp) {
         await withApp(app);
     }
-    const server = app.listen(port, () => resolve(server));
-});
+    return new Promise((resolve) => {
+        const server = app.listen(port, () => resolve(server));
+    });
+}
 
 export const isPortTaken = (port: number): Promise<boolean> => new Promise((resolve, reject) => {
     const tester = createServer();
