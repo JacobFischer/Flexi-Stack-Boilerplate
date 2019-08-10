@@ -8,9 +8,7 @@ import babelConfig from "./babel.config";
 
 export default createWebpackConfiguration(babelConfig, {
     entry: [
-        "core-js/modules/es6.promise",
-        "core-js/modules/es6.array.iterator",
-        "@babel/polyfill/dist/polyfill.js", // polyfill new ES functions for babel
+        "core-js",
         resolve(__dirname, "./index.tsx"),
     ],
     output: {
