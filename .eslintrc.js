@@ -5,7 +5,7 @@ const ENABLED_ERROR = "error";
 
 const { resolve } = require("path");
 
-/** @type {import("eslint").Linter.Config & { plugins?: string[]; extends?: string[] }} */
+/** @type {import("eslint").Linter.Config} */
 const baseEslintConfig = {
     env: {
         es6: true,
