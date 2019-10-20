@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs", // so typescript CLI tools work. other tsconfigs will use esnext to preserve es6 syntax
         "lib": ["esnext"],
         "moduleResolution": "node",
         "jsx": "react",
