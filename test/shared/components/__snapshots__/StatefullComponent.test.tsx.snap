@@ -8,7 +8,7 @@ exports[`StatefullComponent component renders 1`] = `
      times
   </p>
   <button
-    className="sc-bdVaJa hPFtDf"
+    className="sc-AxjAm cDvpSm"
     onClick={[Function]}
   >
     Click me
