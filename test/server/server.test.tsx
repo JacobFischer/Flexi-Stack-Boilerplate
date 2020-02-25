@@ -1,7 +1,6 @@
 import { Server } from "http";
 import { Writable } from "stream";
 import puppeteer from "puppeteer";
-import { preloadAll } from "react-loadable";
 import { render } from "../../src/server/render";
 import { start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
@@ -10,10 +9,7 @@ import { closeServer, isPortTaken } from "../utils";
 const LONG_TIMEOUT = 12500; // for long tests that use puppeteer heavily
 
 let browser = undefined as unknown as puppeteer.Browser; // will be set first below
-beforeAll(() => Promise.all([
-    preloadAll(),
-    puppeteer.launch().then((b) => { browser = b; }),
-]));
+beforeAll(() => puppeteer.launch().then((b) => { browser = b; }));
 
 afterAll(async () => browser && browser.close());
 

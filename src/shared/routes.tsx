@@ -1,9 +1,9 @@
 import React from "react";
-import reactLoadable from "react-loadable";
 import { About } from "./components/About";
 import { SomePage } from "./components/SomePage";
 import { StatefullComponent } from "./components/StatefullComponent";
 
+/*
 const delay = async (time: number) => new Promise((resolve) => setTimeout(resolve, time));
 const Loading = () => <em>Loading</em>;
 
@@ -15,9 +15,12 @@ const LoadableHome = reactLoadable({
     loading: Loading,
     render: ({ Home }) => <Home />,
 });
+*/
+
+import { Home } from "./components/Home";
 
 export const routesObject = {
-    "/": LoadableHome,
+    "/": Home,
     "/about": () => <About creator="Jacob Fischer" />,
     "/some-page": SomePage,
     "/clicker": StatefullComponent,

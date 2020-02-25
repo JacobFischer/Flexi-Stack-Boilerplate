@@ -21,15 +21,6 @@ describe("Test the build", () => {
 
     it("Should have a server build", async () => {
         expect(await isDirectory(build.DIST_PATH_SERVER)).toBe(true);
-
-        const manifestPath = rootDir(build.DIST_PATH_REACT_LOADABLES_MANIFEST);
-        const loadablesStats = await stat(manifestPath);
-        expect(loadablesStats.isFile()).toBe(true);
-
-        const loadablesFile = await readFile(manifestPath);
-        const loadablesObject = JSON.parse(loadablesFile.toString());
-        expect(loadablesObject).toBeTruthy();
-        expect(typeof loadablesObject).toBe("object");
     });
 });
 

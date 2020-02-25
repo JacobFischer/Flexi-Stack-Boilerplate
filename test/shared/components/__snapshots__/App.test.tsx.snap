@@ -3,7 +3,7 @@
 exports[`App component renders 1`] = `
 Array [
   <ul
-    className="sc-AxirZ kpFbfi"
+    className="sc-AxiKw hGVJSi"
   >
     <li>
       <a
@@ -46,16 +46,23 @@ Array [
       </a>
     </li>
   </ul>,
-  <em>
-    Loading
-  </em>,
+  <div
+    className="sc-AxirZ lbijcR"
+  >
+    <h1>
+      Home
+    </h1>
+    <p>
+      Welcome to the index page!
+    </p>
+  </div>,
 ]
 `;
 
 exports[`App component renders the About page 1`] = `
 Array [
   <ul
-    className="sc-AxirZ kpFbfi"
+    className="sc-AxiKw hGVJSi"
   >
     <li>
       <a
@@ -111,7 +118,7 @@ Array [
 exports[`App component renders the NotFound page on bad routes 1`] = `
 Array [
   <ul
-    className="sc-AxirZ kpFbfi"
+    className="sc-AxiKw hGVJSi"
   >
     <li>
       <a
@@ -166,7 +173,7 @@ Array [
 exports[`App component renders the SomePage page 1`] = `
 Array [
   <ul
-    className="sc-AxirZ kpFbfi"
+    className="sc-AxiKw hGVJSi"
   >
     <li>
       <a
@@ -226,7 +233,7 @@ Array [
 exports[`App component renders the index Home page 1`] = `
 Array [
   <ul
-    className="sc-AxirZ kpFbfi"
+    className="sc-AxiKw hGVJSi"
   >
     <li>
       <a
@@ -270,66 +277,7 @@ Array [
     </li>
   </ul>,
   <div
-    className="sc-AxiKw ffVjMp"
-  >
-    <h1>
-      Home
-    </h1>
-    <p>
-      Welcome to the index page!
-    </p>
-  </div>,
-]
-`;
-
-exports[`App component renders with React-Loadable once preloaded 1`] = `
-Array [
-  <ul
-    className="sc-AxirZ kpFbfi"
-  >
-    <li>
-      <a
-        href="/"
-        onClick={[Function]}
-      >
-        /
-      </a>
-    </li>
-    <li>
-      <a
-        href="/about"
-        onClick={[Function]}
-      >
-        /about
-      </a>
-    </li>
-    <li>
-      <a
-        href="/clicker"
-        onClick={[Function]}
-      >
-        /clicker
-      </a>
-    </li>
-    <li>
-      <a
-        href="/some-page"
-        onClick={[Function]}
-      >
-        /some-page
-      </a>
-    </li>
-    <li>
-      <a
-        href="/not-found"
-        onClick={[Function]}
-      >
-        Dead link
-      </a>
-    </li>
-  </ul>,
-  <div
-    className="sc-AxiKw ffVjMp"
+    className="sc-AxirZ lbijcR"
   >
     <h1>
       Home

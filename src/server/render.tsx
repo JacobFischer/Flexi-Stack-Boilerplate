@@ -1,12 +1,9 @@
 import { Writable } from "stream";
 import React from "react";
 import { renderToNodeStream } from "react-dom/server";
-import { Capture } from "react-loadable";
-import { Manifest, getBundles } from "react-loadable/webpack";
 import { StaticRouter, StaticRouterContext } from "react-router";
 import { ServerStyleSheet } from "styled-components";
-import urlJoin from "url-join";
-import { ROOT_ELEMENT_ID, STATIC_BUNDLE_DIR, indexHtmlTemplate } from "../shared/build";
+import { ROOT_ELEMENT_ID, indexHtmlTemplate } from "../shared/build";
 import { App } from "../shared/components/App";
 
 /**
@@ -19,7 +16,6 @@ import { App } from "../shared/components/App";
  */
 export async function render(output: Writable, location: string, csr?: {
     mainScripts: string;
-    manifest: Manifest;
 }) {
     output.write(indexHtmlTemplate.top);
 
@@ -38,24 +34,13 @@ export async function render(output: Writable, location: string, csr?: {
         </div>
     ));
 
-    /* istanbul ignore if: chunks do not exist during tests, so no modules are loaded */
-    if (csr) {
-        jsx = (
-            <Capture report={(moduleName) => loadedModules.push(moduleName)}>
-                {jsx}
-            </Capture>
-        );
-    }
-
     const bodyStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
     bodyStream.pipe(output, { end: false });
     await new Promise((resolve) => bodyStream.once("end", resolve));
 
     /* istanbul ignore if: once again, chunks are never found during tests */
     if (csr) {
-        output.write(getBundles(csr.manifest, loadedModules)
-            .map((bundle) => `<script src="${urlJoin("/", STATIC_BUNDLE_DIR, bundle.file)}"></script>`)
-            .join("") + csr.mainScripts);
+        output.write(csr.mainScripts);
     }
 
     output.end(indexHtmlTemplate.bottom);
