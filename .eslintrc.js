@@ -33,6 +33,9 @@ const baseEslintConfig = {
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
         "airbnb",
     ],
     rules: {
