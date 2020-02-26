@@ -1,26 +1,17 @@
+import loadable from "@loadable/component";
 import React from "react";
 import { About } from "./components/About";
 import { SomePage } from "./components/SomePage";
 import { StatefullComponent } from "./components/StatefullComponent";
 
-/*
-const delay = async (time: number) => new Promise((resolve) => setTimeout(resolve, time));
-const Loading = () => <em>Loading</em>;
+// const delay = async (time: number) => new Promise((resolve) => setTimeout(resolve, time));
 
-const LoadableHome = reactLoadable({
-    loader: async () => {
-        await delay(1000);
-        return import("./components/Home");
-    },
-    loading: Loading,
-    render: ({ Home }) => <Home />,
+const LoadableHome = loadable(() => import("./components/home"), {
+    fallback: <em>Loading</em>,
 });
-*/
-
-import { Home } from "./components/Home";
 
 export const routesObject = {
-    "/": Home,
+    "/": LoadableHome,
     "/about": () => <About creator="Jacob Fischer" />,
     "/some-page": SomePage,
     "/clicker": StatefullComponent,

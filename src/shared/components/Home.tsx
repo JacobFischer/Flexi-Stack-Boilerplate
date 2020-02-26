@@ -16,3 +16,4 @@ export const Home = (): JSX.Element => (
         <p>Welcome to the index page!</p>
     </Hot>
 );
+export default Home;

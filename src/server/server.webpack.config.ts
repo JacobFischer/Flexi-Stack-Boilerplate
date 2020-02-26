@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { resolve } from "path";
+import webpack from "webpack";
 import nodeExternals from "webpack-node-externals";
 import { DIST_PATH_SERVER, createWebpackConfiguration } from "../shared/build";
 import babelConfig from "./babel.config";
@@ -28,4 +29,9 @@ export default createWebpackConfiguration(babelConfig, {
         path: distRoot(DIST_PATH_SERVER),
     },
     target: "node",
+    plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        }),
+    ],
 });

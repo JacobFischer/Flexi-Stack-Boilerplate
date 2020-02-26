@@ -69,10 +69,10 @@ describe("Server", () => [
         await render(stream, location);
 
         // chop off the end, because scripts may exist
-        const expectedHtml = chunks.join("").replace("</div></body></html>", "");
+        const renderedHtml = chunks.join("");
 
         const pageHtml = await page.content();
-        expect(pageHtml).toContain(expectedHtml);
+        expect(pageHtml).toContain(renderedHtml);
 
         // expect at least 1 script tag with client side rendering, otherwise none
         expect(pageHtml.includes("<script")).toBe(enableClientSideRendering);

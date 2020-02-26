@@ -6,7 +6,7 @@ const { resolve } = require("path");
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-/** @type {Partial<import("@jest/types/build/Config").DefaultOptions>} */
+/** @type {Partial<import("@jest/types/build/Config").DefaultOptions & import("@jest/types/build/Config").InitialOptions>} */
 const jestConfig = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
@@ -102,7 +102,7 @@ const jestConfig = {
     // notifyMode: "failure-change",
 
     // A preset that is used as a base for Jest's configuration
-    // preset: null,
+    preset: "ts-jest",
 
     // Run tests from one or more projects
     // projects: null,
@@ -164,7 +164,7 @@ const jestConfig = {
         "/test/utils",
         "([^s]+).config.(js|ts|tsx)",
         ".eslintrc.js(on)?",
-        "/test/setup.tsx?",
+        "/test/(setup|babel-transformer).(t|j)sx?",
     ],
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
@@ -184,7 +184,8 @@ const jestConfig = {
 
     // A map from regular expressions to paths to transformers
     transform: {
-        "^.+\\.tsx?$": "ts-jest",
+        // "^.+\\.tsx?$": "ts-jest",
+        "^.+\\.[t|j]sx?$": resolve(__dirname, "./babel-transformer.js"),
     },
 
     // An array of regexp pattern strings that are matched against all source file paths,
