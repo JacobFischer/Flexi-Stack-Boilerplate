@@ -3,7 +3,9 @@ import { resolve } from "path";
 // import cors from "cors";
 import express from "express";
 import { readFile } from "fs-extra";
-import { DIST_PATH_CLIENT, STATIC_BUNDLE_DIR } from "../shared/build";
+import {
+    DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME, STATIC_BUNDLE_DIR,
+} from "../shared/build";
 import { routeExists } from "../shared/routes";
 import { render } from "./render";
 
@@ -21,16 +23,9 @@ const rootDir = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
  *
  * @returns a promise that resolves to the <script src="index.js" /> and what-not in the client dist.
  */
-async function getMainScripts(): Promise<string> {
-    const indexHtml = await readFile(rootDir(DIST_PATH_CLIENT, "index.html"));
-    const indexHtmlScripts = indexHtml.toString().match(/<script(.*?)<\/script>/g);
-
-    /* istanbul ignore if: we never expect this to happen, check is to appease TypeScript */
-    if (!indexHtmlScripts) {
-        throw new Error("No main scripts!");
-    }
-
-    return indexHtmlScripts.join("");
+async function getLoadableComponentsStats(): Promise<object> {
+    const statsFile = await readFile(rootDir(DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME));
+    return JSON.parse(statsFile.toString());
 }
 
 /**
@@ -49,11 +44,8 @@ export async function start(port: number, clientSideRendering: boolean) {
         app.use("/static", express.static(rootDir(DIST_PATH_CLIENT, STATIC_BUNDLE_DIR)));
     }
 
-    const csrData = clientSideRendering
-        ? {
-            mainScripts: await getMainScripts(),
-            preloaded: true,
-        }
+    const csrStats = clientSideRendering
+        ? await getLoadableComponentsStats()
         : undefined;
 
     app.get("*", (req, res) => {
@@ -61,7 +53,7 @@ export async function start(port: number, clientSideRendering: boolean) {
             res.status(404);
         }
 
-        return render(res, req.url, csrData);
+        return render(res, req.url, csrStats);
     });
 
     return new Promise<Server>((res) => {

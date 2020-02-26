@@ -1,4 +1,5 @@
 import { Writable } from "stream";
+import { ChunkExtractor } from "@loadable/server";
 import React from "react";
 import { renderToNodeStream } from "react-dom/server";
 import { StaticRouter, StaticRouterContext } from "react-router";
@@ -11,16 +12,13 @@ import { App } from "../shared/components/App";
  *
  * @param output - the write stream to stream the html to as it is built
  * @param location - the location to render in the app
- * @param csr - client side rendering options to inject into the rendered html
+ * @param csrStats - client side rendering options to inject into the rendered html
  * @returns a promise that resolves once the entire html document has been written to `output`
  */
-export async function render(output: Writable, location: string, csr?: {
-    mainScripts: string;
-}) {
+export async function render(output: Writable, location: string, csrStats?: object) {
     output.write(indexHtmlTemplate.top);
 
     const sheet = new ServerStyleSheet();
-    const loadedModules = new Array<string>();
     // normally we"d use a StaticRouter context to capture if the rendered route was a 404 not found;
     // however we are streaming this response. So the HTTP Status Code has already been sent,
     // thus we don"t care at this point in time.
@@ -34,13 +32,18 @@ export async function render(output: Writable, location: string, csr?: {
         </div>
     ));
 
+    const extractor = csrStats && new ChunkExtractor({ stats: csrStats });
+    if (extractor) {
+        jsx = extractor.collectChunks(jsx);
+    }
+
     const bodyStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
     bodyStream.pipe(output, { end: false });
     await new Promise((resolve) => bodyStream.once("end", resolve));
 
     /* istanbul ignore if: once again, chunks are never found during tests */
-    if (csr) {
-        output.write(csr.mainScripts);
+    if (extractor) {
+        output.write(extractor.getScriptTags());
     }
 
     output.end(indexHtmlTemplate.bottom);

@@ -8,5 +8,7 @@ export const DIST_PATH_CLIENT = join(DIST_DIR, "client/");
 export const DIST_PATH_SERVER = join(DIST_DIR, "server/");
 export const DIST_PATH_STATIC = join(DIST_DIR, "static/");
 
+export const LOADABLE_COMPONENTS_STATS_FILENAME = "loadables-stats.json";
+
 export * from "./shared.webpack.config";
 export * from "./template";

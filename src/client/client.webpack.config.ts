@@ -1,8 +1,10 @@
 /* eslint-env node */
 import { join, resolve } from "path";
+import LoadablePlugin from "@loadable/webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import {
-    ROOT_ELEMENT_ID, STATIC_BUNDLE_DIR, createWebpackConfiguration, indexHtmlTemplate,
+    LOADABLE_COMPONENTS_STATS_FILENAME, ROOT_ELEMENT_ID, STATIC_BUNDLE_DIR,
+    createWebpackConfiguration, indexHtmlTemplate,
 } from "../shared/build";
 import babelConfig from "./babel.config";
 
@@ -16,6 +18,9 @@ export default createWebpackConfiguration(babelConfig, {
         path: resolve(__dirname, "../../dist/client"),
     },
     plugins: [
+        new LoadablePlugin({
+            filename: LOADABLE_COMPONENTS_STATS_FILENAME,
+        }),
         new HtmlWebpackPlugin({
             templateContent: [
                 indexHtmlTemplate.top,
