@@ -2,7 +2,7 @@ import { Server } from "http";
 import { Writable } from "stream";
 import puppeteer from "puppeteer";
 import { render } from "../../src/server/render";
-import { start } from "../../src/server/start";
+import { getLoadableComponentsStats, start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
 import { closeServer, isPortTaken } from "../utils";
 
@@ -66,13 +66,17 @@ describe("Server", () => [
                 next();
             },
         });
-        await render(stream, location);
+        const csr = enableClientSideRendering
+            ? await getLoadableComponentsStats()
+            : undefined;
+
+        await render(stream, location, csr);
 
         // chop off the end, because scripts may exist
-        const renderedHtml = chunks.join("");
+        const renderedHtml = chunks.join("").replace(/async/g, `async=""`); // special case, webkit won't allow tagless
 
         const pageHtml = await page.content();
-        expect(pageHtml).toContain(renderedHtml);
+        expect(pageHtml).toEqual(renderedHtml);
 
         // expect at least 1 script tag with client side rendering, otherwise none
         expect(pageHtml.includes("<script")).toBe(enableClientSideRendering);

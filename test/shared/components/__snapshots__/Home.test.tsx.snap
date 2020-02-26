@@ -2,7 +2,7 @@
 
 exports[`Home component renders 1`] = `
 <div
-  className="sc-AxjAm jPKvau"
+  className="Home__Hot-sc-1bxbiux-0 jbQijg"
 >
   <h1>
     Home

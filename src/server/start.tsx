@@ -23,7 +23,7 @@ const rootDir = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
  *
  * @returns a promise that resolves to the <script src="index.js" /> and what-not in the client dist.
  */
-async function getLoadableComponentsStats(): Promise<object> {
+export async function getLoadableComponentsStats(): Promise<object> {
     const statsFile = await readFile(rootDir(DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME));
     return JSON.parse(statsFile.toString());
 }

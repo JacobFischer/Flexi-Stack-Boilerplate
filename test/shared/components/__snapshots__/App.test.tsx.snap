@@ -3,7 +3,7 @@
 exports[`App component renders 1`] = `
 Array [
   <ul
-    className="sc-AxiKw hGVJSi"
+    className="App__NavBar-sc-24p3v9-0 jafctB"
   >
     <li>
       <a
@@ -47,7 +47,7 @@ Array [
     </li>
   </ul>,
   <div
-    className="sc-AxirZ lbijcR"
+    className="Home__Hot-sc-1bxbiux-0 jbQijg"
   >
     <h1>
       Home
@@ -62,7 +62,7 @@ Array [
 exports[`App component renders the About page 1`] = `
 Array [
   <ul
-    className="sc-AxiKw hGVJSi"
+    className="App__NavBar-sc-24p3v9-0 jafctB"
   >
     <li>
       <a
@@ -118,7 +118,7 @@ Array [
 exports[`App component renders the NotFound page on bad routes 1`] = `
 Array [
   <ul
-    className="sc-AxiKw hGVJSi"
+    className="App__NavBar-sc-24p3v9-0 jafctB"
   >
     <li>
       <a
@@ -173,7 +173,7 @@ Array [
 exports[`App component renders the SomePage page 1`] = `
 Array [
   <ul
-    className="sc-AxiKw hGVJSi"
+    className="App__NavBar-sc-24p3v9-0 jafctB"
   >
     <li>
       <a
@@ -233,7 +233,7 @@ Array [
 exports[`App component renders the index Home page 1`] = `
 Array [
   <ul
-    className="sc-AxiKw hGVJSi"
+    className="App__NavBar-sc-24p3v9-0 jafctB"
   >
     <li>
       <a
@@ -277,7 +277,7 @@ Array [
     </li>
   </ul>,
   <div
-    className="sc-AxirZ lbijcR"
+    className="Home__Hot-sc-1bxbiux-0 jbQijg"
   >
     <h1>
       Home
