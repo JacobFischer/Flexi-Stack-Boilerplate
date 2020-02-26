@@ -31,12 +31,12 @@ const baseEslintConfig = {
     ],
     extends: [
         "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:import/typescript",
-        "airbnb",
     ],
     rules: {
         // React
@@ -47,6 +47,7 @@ const baseEslintConfig = {
         // TypeScript
         "@typescript-eslint/explicit-function-return-type": "off", // For now does not allow enough control over arrow functions, always requiring return types even on simple reducers and such.
 
+        /*
         // Basically old rules from tslint ported over that override airbnb
         "quotes": [ENABLED_ERROR, "double"],
         "indent": [ENABLED_ERROR, 4],

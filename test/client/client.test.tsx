@@ -32,6 +32,7 @@ describe("Client", () => {
         expect(await isPortTaken(PORT)).toBe(true);
     });
 
+    /* eslint-disable-next-line jest/no-test-callback */
     it("renders on the web page", async (done) => {
         expect(browser).toBeTruthy();
         const page = await browser.newPage();

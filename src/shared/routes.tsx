@@ -4,7 +4,7 @@ import { About } from "./components/About";
 import { SomePage } from "./components/SomePage";
 import { StatefullComponent } from "./components/StatefullComponent";
 
-const Home = loadable(() => import("./components/home"), {
+const Home = loadable(() => import("./components/Home"), {
     fallback: <em>Loading</em>,
 });
 
