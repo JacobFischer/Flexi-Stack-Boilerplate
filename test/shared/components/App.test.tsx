@@ -1,5 +1,4 @@
 import React from "react";
-import Loadable from "react-loadable";
 import { StaticRouter } from "react-router";
 import renderer from "react-test-renderer";
 import { App } from "../../../src/shared/components/App";
@@ -13,12 +12,6 @@ const renderApp = (location?: string): renderer.ReactTestRendererJSON | null => 
 
 describe("App component", () => {
     it("renders", () => {
-        expect(renderApp()).toMatchSnapshot();
-    });
-
-    it("renders with React-Loadable once preloaded", async () => {
-        await Loadable.preloadAll();
-
         expect(renderApp()).toMatchSnapshot();
     });
 

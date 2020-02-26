@@ -1,6 +1,5 @@
 import { join } from "path";
 import { createWriteStream, ensureDir } from "fs-extra";
-import { preloadAll } from "react-loadable";
 import { render } from "../server/render";
 import { routes } from "../shared/routes";
 
@@ -18,8 +17,6 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
     const routesAnd404 = ["/404", ...routes.map(([route]) => route)];
 
     log(`Starting to build static pages for all ${routesAnd404.length} routes`);
-
-    await preloadAll();
 
     await Promise.all(routesAnd404.map(async (route) => {
         let pathDir = rootDir(route);

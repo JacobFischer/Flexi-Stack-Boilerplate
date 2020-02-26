@@ -1,20 +1,10 @@
 import React from "react";
-import reactLoadable from "react-loadable";
+import universal from "react-universal-component";
 import { About } from "./components/About";
 import { SomePage } from "./components/SomePage";
 import { StatefullComponent } from "./components/StatefullComponent";
 
-const delay = async (time: number) => new Promise((resolve) => setTimeout(resolve, time));
-const Loading = () => <em>Loading</em>;
-
-const LoadableHome = reactLoadable({
-    loader: async () => {
-        await delay(1000);
-        return import("./components/Home");
-    },
-    loading: Loading,
-    render: ({ Home }) => <Home />,
-});
+const LoadableHome = universal(import("./components/Home"));
 
 export const routesObject = {
     "/": LoadableHome,

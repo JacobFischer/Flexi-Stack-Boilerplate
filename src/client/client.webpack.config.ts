@@ -6,7 +6,10 @@ import {
 } from "../shared/build";
 import babelConfig from "./babel.config";
 
+const { StatsWriterPlugin } = require("webpack-stats-plugin");
+
 export default createWebpackConfiguration(babelConfig, {
+    stats: true,
     entry: [
         "core-js",
         resolve(__dirname, "./index.tsx"),
@@ -16,6 +19,9 @@ export default createWebpackConfiguration(babelConfig, {
         path: resolve(__dirname, "../../dist/client"),
     },
     plugins: [
+        new StatsWriterPlugin({
+            filename: "stats.json", // Default
+        }),
         new HtmlWebpackPlugin({
             templateContent: [
                 indexHtmlTemplate.top,
