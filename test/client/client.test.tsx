@@ -4,27 +4,35 @@ import express from "express";
 import { stat } from "fs-extra";
 import puppeteer from "puppeteer";
 import {
-    closeServer, getClientDistDir, isPortTaken, newExpressServer,
+    closeServer,
+    getClientDistDir,
+    isPortTaken,
+    newExpressServer,
 } from "../utils";
 
 const PORT = 8888;
-let browser = undefined as unknown as puppeteer.Browser;
-let server = undefined as unknown as Server;
-beforeAll(() => Promise.all([
-    puppeteer.launch()
-        .then((b) => { browser = b; }),
-    newExpressServer(PORT, async (app) => app.use("/", express.static(await getClientDistDir())))
-        .then((s) => { server = s; }),
-]));
+let browser = (undefined as unknown) as puppeteer.Browser;
+let server = (undefined as unknown) as Server;
+beforeAll(() =>
+    Promise.all([
+        puppeteer.launch().then((b) => {
+            browser = b;
+        }),
+        newExpressServer(PORT, async (app) =>
+            app.use("/", express.static(await getClientDistDir())),
+        ).then((s) => {
+            server = s;
+        }),
+    ]),
+);
 
-afterAll(() => Promise.all([
-    browser.close(),
-    closeServer(server),
-]));
+afterAll(() => Promise.all([browser.close(), closeServer(server)]));
 
 describe("Client", () => {
     it("has been built", async () => {
-        const indexStat = await stat(join(await getClientDistDir(), "index.html"));
+        const indexStat = await stat(
+            join(await getClientDistDir(), "index.html"),
+        );
         expect(indexStat.isFile()).toBe(true);
     });
 

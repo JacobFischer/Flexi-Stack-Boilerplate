@@ -26,9 +26,7 @@ interface LoadableComponentsBabelImport<T> {
 // that _appears_ to function the same way.
 require("@loadable/component").default = function JestLoadableComponent<
     T extends {} | undefined
->(
-    loadableComponentImport: LoadableComponentsBabelImport<T>,
-) {
+>(loadableComponentImport: LoadableComponentsBabelImport<T>) {
     const loaded = loadableComponentImport.requireSync({} as T);
 
     // This is completely redundant but forces the () => import("./whatever")
@@ -38,4 +36,4 @@ require("@loadable/component").default = function JestLoadableComponent<
     loadableComponentImport.importAsync({} as T);
 
     return loaded.default;
-}
+};

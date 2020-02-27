@@ -2,7 +2,6 @@ import { DIST_PATH_STATIC } from "../shared/build";
 import { buildStaticPages } from "./build";
 
 /* eslint-disable no-console */
-
 (async () => {
     try {
         await buildStaticPages(DIST_PATH_STATIC, console.log);

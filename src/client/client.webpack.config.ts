@@ -3,16 +3,16 @@ import { join, resolve } from "path";
 import LoadablePlugin from "@loadable/webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import {
-    LOADABLE_COMPONENTS_STATS_FILENAME, ROOT_ELEMENT_ID, STATIC_BUNDLE_DIR,
-    createWebpackConfiguration, indexHtmlTemplate,
+    LOADABLE_COMPONENTS_STATS_FILENAME,
+    ROOT_ELEMENT_ID,
+    STATIC_BUNDLE_DIR,
+    createWebpackConfiguration,
+    indexHtmlTemplate,
 } from "../shared/build";
 import babelConfig from "./babel.config";
 
 export default createWebpackConfiguration(babelConfig, {
-    entry: [
-        "core-js",
-        resolve(__dirname, "./index.tsx"),
-    ],
+    entry: ["core-js", resolve(__dirname, "./index.tsx")],
     output: {
         filename: join(STATIC_BUNDLE_DIR, "[name].js"),
         path: resolve(__dirname, "../../dist/client"),

@@ -3,12 +3,14 @@ import { StaticRouter } from "react-router";
 import renderer from "react-test-renderer";
 import { App } from "../../../src/shared/components/App";
 
-const renderApp = (location?: string): renderer.ReactTestRendererJSON | null => renderer
-    .create((
-        <StaticRouter location={location}>
-            <App />
-        </StaticRouter>
-    )).toJSON();
+const renderApp = (location?: string): renderer.ReactTestRendererJSON | null =>
+    renderer
+        .create(
+            <StaticRouter location={location}>
+                <App />
+            </StaticRouter>,
+        )
+        .toJSON();
 
 describe("App component", () => {
     it("renders", () => {

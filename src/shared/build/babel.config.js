@@ -6,11 +6,14 @@ const sharedBabelConfig = {
     plugins: [
         "@loadable/babel-plugin",
         "@babel/plugin-syntax-dynamic-import",
-        ["babel-plugin-styled-components", {
-            ssr: true,
-            displayName: true,
-            pure: true,
-        }],
+        [
+            "babel-plugin-styled-components",
+            {
+                ssr: true,
+                displayName: true,
+                pure: true,
+            },
+        ],
     ],
 };
 

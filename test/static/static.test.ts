@@ -1,7 +1,5 @@
 import { join, resolve } from "path";
-import {
-    emptyDir, ensureDir, readdir, remove, stat,
-} from "fs-extra";
+import { emptyDir, ensureDir, readdir, remove, stat } from "fs-extra";
 import { routes } from "../../src/shared/routes";
 import { buildStaticPages } from "../../src/static/build";
 
@@ -34,11 +32,13 @@ describe("Static site generation", () => {
         expect(postFiles.length).toBeGreaterThanOrEqual(2); // 404 and index pages must exist
         expect(postFiles).toContain("404.html");
 
-        await Promise.all(routes.map(async ([route]) => {
-            const staticPath = join(OUTPUT_DIR, route, "index.html");
-            const fileStats = await stat(staticPath);
-            expect(fileStats.isFile()).toBe(true);
-        }));
+        await Promise.all(
+            routes.map(async ([route]) => {
+                const staticPath = join(OUTPUT_DIR, route, "index.html");
+                const fileStats = await stat(staticPath);
+                expect(fileStats.isFile()).toBe(true);
+            }),
+        );
     }, 12500);
 
     it("Use a custom logger", async () => {

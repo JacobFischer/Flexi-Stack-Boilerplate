@@ -2,7 +2,6 @@ import { start } from "./start";
 /* eslint-disable no-console */
 
 const PORT = 8080;
-
 (async () => {
     console.log("--- Server Starting ---");
 

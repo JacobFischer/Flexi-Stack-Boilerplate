@@ -15,7 +15,7 @@ const baseEslintConfig = {
     parserOptions: {
         project: resolve("./tsconfig.json"),
         ecmaFeatures: {
-            jsx: true
+            jsx: true,
         },
         ecmaVersion: 2018,
         sourceType: "module",
@@ -28,6 +28,7 @@ const baseEslintConfig = {
         "react",
         "eslint-plugin-import-order-alphabetical",
         "jsdoc",
+        "progress",
     ],
     extends: [
         "eslint:recommended",
@@ -37,8 +38,13 @@ const baseEslintConfig = {
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:import/typescript",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
     ],
     rules: {
+        // Show a progress bar to know it's not hanging
+        "progress/activate": 1,
+
         // React
         "react/prop-types": "off", // TypeScript handles props' types at build time, much better than runtime.
         "react/display-name": "off", // Babel plugin now injects display name
@@ -115,7 +121,7 @@ const baseEslintConfig = {
         "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
         "import/resolver": {
             node: {
-              extensions: [".js", ".jsx", ".ts", ".tsx"],
+                extensions: [".js", ".jsx", ".ts", ".tsx"],
             },
         },
         "import/parsers": {

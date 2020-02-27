@@ -5,12 +5,11 @@ import nodeExternals from "webpack-node-externals";
 import { DIST_PATH_SERVER, createWebpackConfiguration } from "../shared/build";
 import babelConfig from "./babel.config";
 
-const distRoot = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
+const distRoot = (...paths: string[]) =>
+    resolve(__dirname, "../../", ...paths);
 
 export default createWebpackConfiguration(babelConfig, {
-    entry: [
-        resolve(__dirname, "./index.tsx"),
-    ],
+    entry: [resolve(__dirname, "./index.tsx")],
     // we don't want to bundle node_modules (external modules)
     externals: [nodeExternals()],
     // we will be running on node, no polyfills or mocks needs;
@@ -31,7 +30,7 @@ export default createWebpackConfiguration(babelConfig, {
     target: "node",
     plugins: [
         new webpack.optimize.LimitChunkCountPlugin({
-            maxChunks: 1
+            maxChunks: 1,
         }),
     ],
 });

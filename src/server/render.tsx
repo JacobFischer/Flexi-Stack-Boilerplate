@@ -15,7 +15,11 @@ import { App } from "../shared/components/App";
  * @param csrStats - client side rendering options to inject into the rendered html
  * @returns a promise that resolves once the entire html document has been written to `output`
  */
-export async function render(output: Writable, location: string, csrStats?: object) {
+export async function render(
+    output: Writable,
+    location: string,
+    csrStats?: object,
+) {
     output.write(indexHtmlTemplate.top);
 
     const sheet = new ServerStyleSheet();
@@ -24,13 +28,13 @@ export async function render(output: Writable, location: string, csrStats?: obje
     // thus we don"t care at this point in time.
     const staticRouterContext: StaticRouterContext = {};
 
-    let jsx = sheet.collectStyles((
+    let jsx = sheet.collectStyles(
         <div id={ROOT_ELEMENT_ID}>
             <StaticRouter location={location} context={staticRouterContext}>
                 <App />
             </StaticRouter>
-        </div>
-    ));
+        </div>,
+    );
 
     const extractor = csrStats && new ChunkExtractor({ stats: csrStats });
     if (extractor) {

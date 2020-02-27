@@ -16,23 +16,27 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
     const rootDir = (...paths: string[]) => join(outputPath, ...paths);
     const routesAnd404 = ["/404", ...routes.map(([route]) => route)];
 
-    log(`Starting to build static pages for all ${routesAnd404.length} routes`);
+    log(
+        `Starting to build static pages for all ${routesAnd404.length} routes`,
+    );
 
-    await Promise.all(routesAnd404.map(async (route) => {
-        let pathDir = rootDir(route);
-        let filename = "index.html";
-        if (route === "/404") {
-            pathDir = rootDir(); // we don't want the directory 404/,
-            filename = "404.html"; // just the file 404.html
-        }
+    await Promise.all(
+        routesAnd404.map(async (route) => {
+            let pathDir = rootDir(route);
+            let filename = "index.html";
+            if (route === "/404") {
+                pathDir = rootDir(); // we don't want the directory 404/,
+                filename = "404.html"; // just the file 404.html
+            }
 
-        await ensureDir(pathDir);
+            await ensureDir(pathDir);
 
-        const pathFile = join(pathDir, filename);
-        const fileStream = createWriteStream(pathFile);
+            const pathFile = join(pathDir, filename);
+            const fileStream = createWriteStream(pathFile);
 
-        await render(fileStream, route);
+            await render(fileStream, route);
 
-        log(`  -> Route '${route}' saved to static file '${pathFile}'`);
-    }));
+            log(`  -> Route '${route}' saved to static file '${pathFile}'`);
+        }),
+    );
 }

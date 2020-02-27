@@ -4,7 +4,9 @@ import { resolve } from "path";
 import express from "express";
 import { readFile } from "fs-extra";
 import {
-    DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME, STATIC_BUNDLE_DIR,
+    DIST_PATH_CLIENT,
+    LOADABLE_COMPONENTS_STATS_FILENAME,
+    STATIC_BUNDLE_DIR,
 } from "../shared/build";
 import { routeExists } from "../shared/routes";
 import { render } from "./render";
@@ -17,14 +19,15 @@ import { render } from "./render";
  */
 const rootDir = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
 
-
 /**
  * Gets the main scripts from a client dist.
  *
  * @returns a promise that resolves to the <script src="index.js" /> and what-not in the client dist.
  */
 export async function getLoadableComponentsStats(): Promise<object> {
-    const statsFile = await readFile(rootDir(DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME));
+    const statsFile = await readFile(
+        rootDir(DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME),
+    );
     return JSON.parse(statsFile.toString());
 }
 
@@ -41,7 +44,10 @@ export async function start(port: number, clientSideRendering: boolean) {
     // app.use(cors);
 
     if (clientSideRendering) {
-        app.use("/static", express.static(rootDir(DIST_PATH_CLIENT, STATIC_BUNDLE_DIR)));
+        app.use(
+            "/static",
+            express.static(rootDir(DIST_PATH_CLIENT, STATIC_BUNDLE_DIR)),
+        );
     }
 
     const csrStats = clientSideRendering

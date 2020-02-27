@@ -7,11 +7,8 @@ const testEslintConfig = {
         "jest/globals": true,
         node: true,
     },
-    plugins: [ "jest" ],
-    extends: [
-        "../.eslintrc.js",
-        "plugin:jest/recommended",
-    ],
+    plugins: ["jest"],
+    extends: ["../.eslintrc.js", "plugin:jest/recommended"],
 };
 
 module.exports = testEslintConfig;

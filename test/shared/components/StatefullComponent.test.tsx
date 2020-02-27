@@ -1,11 +1,16 @@
 import { shallow } from "enzyme";
 import React from "react";
 import renderer from "react-test-renderer";
-import { Button, StatefullComponent } from "../../../src/shared/components/StatefullComponent";
+import {
+    Button,
+    StatefullComponent,
+} from "../../../src/shared/components/StatefullComponent";
 
 describe("StatefullComponent component", () => {
     it("renders", () => {
-        expect(renderer.create(<StatefullComponent />).toJSON()).toMatchSnapshot();
+        expect(
+            renderer.create(<StatefullComponent />).toJSON(),
+        ).toMatchSnapshot();
     });
 
     it("Counts state", () => {

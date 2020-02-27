@@ -15,6 +15,9 @@ export const routesObject = {
     "/clicker": StatefullComponent,
 };
 
-export const routeExists = (path: string) => Object.prototype.hasOwnProperty.call(routesObject, path);
+export const routeExists = (path: string) =>
+    Object.prototype.hasOwnProperty.call(routesObject, path);
 
-export const routes = Object.entries(routesObject).sort(([a], [b]) => a.localeCompare(b));
+export const routes = Object.entries(routesObject).sort(([a], [b]) =>
+    a.localeCompare(b),
+);
