@@ -60,7 +60,10 @@ const baseEslintConfig = {
         "jsdoc/check-indentation": [ENABLED_WARNING],
         "jsdoc/require-description": [ENABLED_WARNING],
         "jsdoc/require-description-complete-sentence": [ENABLED_WARNING],
-        "jsdoc/require-hyphen-before-param-description": [ENABLED_WARNING, "always"],
+        "jsdoc/require-hyphen-before-param-description": [
+            ENABLED_WARNING,
+            "always",
+        ],
     },
     settings: {
         react: {
