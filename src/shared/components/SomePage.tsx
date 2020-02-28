@@ -3,7 +3,7 @@ import React from "react";
 /**
  * Just some page.
  *
- * @returns a react functional component.
+ * @returns A functional react functional component.
  */
 export const SomePage = () => (
     <>

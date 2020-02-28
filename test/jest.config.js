@@ -6,7 +6,7 @@ const { resolve } = require("path");
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-/** @type {Partial<import("@jest/types/build/Config").DefaultOptions & import("@jest/types/build/Config").InitialOptions>} */
+/** @type {Partial<import("@jest/types/build/Config").InitialOptions>} */
 const jestConfig = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,

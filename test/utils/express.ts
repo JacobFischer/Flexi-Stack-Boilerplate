@@ -2,6 +2,12 @@ import { Server } from "http";
 import { createServer } from "net";
 import express from "express";
 
+/**
+ * Closes m http server created by React as a promise.
+ *
+ * @param server - The server to close.
+ * @returns A promise that resolves once the server is closed.
+ */
 export const closeServer = (server: Server): Promise<void> =>
     new Promise((resolve, reject) => {
         server.close((err) => {
@@ -16,8 +22,8 @@ export const closeServer = (server: Server): Promise<void> =>
 /**
  * Creates a new express server promise-ified.
  *
- * @param port - The port to bind the express server to
- * @param withApp - Optional Express app HOC
+ * @param port - The port to bind the express server to.
+ * @param withApp - Optional Express app HOC.
  * @returns A new express server.
  */
 export async function newExpressServer(

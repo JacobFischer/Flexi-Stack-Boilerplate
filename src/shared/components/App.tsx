@@ -11,7 +11,7 @@ const NavBar = styled.ul({
 /**
  * The core App. This is the entry-point into the React application.
  *
- * @returns a React functional component that drives the entire applications.
+ * @returns A react functional component that drives the entire applications.
  */
 export const App = () => (
     <>

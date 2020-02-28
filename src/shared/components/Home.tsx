@@ -8,7 +8,7 @@ const Hot = styled.div({
 /**
  * An example Home page element.
  *
- * @returns a functional component.
+ * @returns A functional react component.
  */
 export const Home = (): JSX.Element => (
     <Hot>

@@ -22,7 +22,7 @@ const rootDir = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
 /**
  * Gets the main scripts from a client dist.
  *
- * @returns a promise that resolves to the <script src="index.js" /> and what-not in the client dist.
+ * @returns A promise that resolves to the <script src="index.js" /> and what-not in the client dist.
  */
 export async function getLoadableComponentsStats(): Promise<object> {
     const statsFile = await readFile(

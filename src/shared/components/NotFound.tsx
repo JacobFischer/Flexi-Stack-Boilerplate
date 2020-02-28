@@ -3,7 +3,7 @@ import React from "react";
 /**
  * The page displayed when a route is not found to render, for 404s.
  *
- * @returns a react functional component.
+ * @returns A react functional component.
  */
 export const NotFound = () => (
     <>

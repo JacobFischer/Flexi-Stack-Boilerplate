@@ -3,7 +3,7 @@ import React from "react";
 /**
  * The About page.
  *
- * @param props - React props
+ * @param props - The react props with creator string.
  * @param props.creator - An optional creator string override to show how to use a param.
  * @returns A functional react component that uses props.
  */

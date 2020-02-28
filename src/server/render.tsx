@@ -10,10 +10,10 @@ import { App } from "../shared/components/App";
 /**
  * Renders the React app in a node (server) environment.
  *
- * @param output - the write stream to stream the html to as it is built
- * @param location - the location to render in the app
- * @param csrStats - client side rendering options to inject into the rendered html
- * @returns a promise that resolves once the entire html document has been written to `output`
+ * @param output - The write stream to stream the html to as it is built.
+ * @param location - The location to render in the app.
+ * @param csrStats - Client side rendering options to inject into the rendered html.
+ * @returns A promise that resolves once the entire html document has been written to `output`.
  */
 export async function render(
     output: Writable,

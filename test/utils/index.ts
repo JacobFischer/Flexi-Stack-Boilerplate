@@ -6,7 +6,7 @@ const CLIENT_DIST_DIR = join(__dirname, "../../dist/client/");
 /**
  * Gets the client dist directory, or throws an error if it does not exist.
  *
- * @returns a promise that resolves to the path as a string. If the dist is not present it instread throws an error.
+ * @returns A promise that resolves to the path as a string. If the dist is not present it instread throws an error.
  */
 export async function getClientDistDir(): Promise<string> {
     if (!(await stat(CLIENT_DIST_DIR)).isDirectory()) {

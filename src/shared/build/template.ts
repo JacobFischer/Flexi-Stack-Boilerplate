@@ -2,7 +2,7 @@
  * Un-indents text from 4 spaces, newlines, and tabs to nothing.
  *
  * @param str - The string to un-indent.
- * @returns the string without 4 spaces, newlines, or tabs.
+ * @returns The string without 4 spaces, newlines, or tabs.
  */
 const unIndent = (str: string) => str.replace(/ {4}|\n|\t/g, "");
 
