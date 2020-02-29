@@ -1,5 +1,7 @@
+// @ts-check
+
 /** @type Partial<import("prettier").RequiredOptions> */
-const prettierOptions = {
+const prettierConfig = {
     arrowParens: "always",
     bracketSpacing: true,
     endOfLine: "lf",
@@ -13,4 +15,4 @@ const prettierOptions = {
     useTabs: false,
 };
 
-module.exports = prettierOptions;
+module.exports = prettierConfig;
