@@ -3,10 +3,10 @@
 
 /** @type {typeof import("../../.eslintrc.js")} */
 const clientEslintConfig = {
-    env: {
-        browser: true,
-    },
-    extends: ["../../.eslintrc.js"],
+    extends: [
+        "../../.eslintrc.js",
+        "jacobfischer/browser",
+    ],
 };
 
 module.exports = clientEslintConfig;

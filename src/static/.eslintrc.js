@@ -2,10 +2,10 @@
 
 /** @type {typeof import("../../.eslintrc.js")} */
 const staticEslintConfig = {
-    env: {
-        node: true,
-    },
-    extends: ["../../.eslintrc.js"],
+    extends: [
+        "../../.eslintrc.js",
+        "jacobfischer/node",
+    ],
 };
 
 module.exports = staticEslintConfig;
