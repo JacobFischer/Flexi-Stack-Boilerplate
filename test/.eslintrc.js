@@ -2,10 +2,7 @@
 
 /** @type {typeof import("../.eslintrc.js")} */
 const testEslintConfig = {
-    extends: [
-        "../.eslintrc.js",
-        "jacobfischer/jest",
-    ],
+    extends: ["../.eslintrc.js", "jacobfischer/jest"],
 };
 
 module.exports = testEslintConfig;
