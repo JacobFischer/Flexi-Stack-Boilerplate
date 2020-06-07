@@ -24,8 +24,9 @@ interface LoadableComponentsBabelImport<T> {
 // However jest will be running live under node transpiling on the fly,
 // So the goal of this hack to inject our own function to replace loadable()
 // that _appears_ to function the same way.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 require("@loadable/component").default = function JestLoadableComponent<
-    T extends {} | undefined
+    T extends Record<string, unknown> | undefined
 >(loadableComponentImport: LoadableComponentsBabelImport<T>) {
     const loaded = loadableComponentImport.requireSync({} as T);
 
@@ -33,7 +34,7 @@ require("@loadable/component").default = function JestLoadableComponent<
     // to be invoked so the code coverage test can see it was ran, though
     // really the requireSync above actually ran that code; however jest
     // won't be able to register the function as ran otherwise.
-    loadableComponentImport.importAsync({} as T);
+    void loadableComponentImport.importAsync({} as T);
 
     return loaded.default;
 };

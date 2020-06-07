@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve } = require("path");
 const babelJest = require("babel-jest");
 

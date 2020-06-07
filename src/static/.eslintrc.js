@@ -3,7 +3,7 @@
 
 /** @type {typeof import("../../.eslintrc.js")} */
 const staticEslintConfig = {
-    extends: ["../../.eslintrc.js", "jacobfischer/node"],
+    extends: ["jacobfischer/node", "../../.eslintrc.js"],
 };
 
 module.exports = staticEslintConfig;

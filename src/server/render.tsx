@@ -18,7 +18,7 @@ import { App } from "../shared/components/App";
 export async function render(
     output: Writable,
     location: string,
-    csrStats?: object,
+    csrStats?: Record<string, unknown>,
 ) {
     output.write(indexHtmlTemplate.top);
 

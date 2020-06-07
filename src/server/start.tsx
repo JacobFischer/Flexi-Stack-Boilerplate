@@ -24,11 +24,21 @@ const rootDir = (...paths: string[]) => resolve(__dirname, "../../", ...paths);
  *
  * @returns A promise that resolves to the <script src="index.js" /> and what-not in the client dist.
  */
-export async function getLoadableComponentsStats(): Promise<object> {
+export async function getLoadableComponentsStats() {
     const statsFile = await readFile(
         rootDir(DIST_PATH_CLIENT, LOADABLE_COMPONENTS_STATS_FILENAME),
     );
-    return JSON.parse(statsFile.toString());
+    const obj = JSON.parse(statsFile.toString()) as unknown;
+    /* istanbul ignore else */
+    if (obj !== null && typeof obj === "object") {
+        return obj as Record<string, unknown>;
+    } else {
+        throw new Error(
+            `Loadable component stats file parsed to unknown shape ${String(
+                obj,
+            )}`,
+        );
+    }
 }
 
 /**
@@ -37,9 +47,13 @@ export async function getLoadableComponentsStats(): Promise<object> {
  * @param port - The port to bind to. Must be open.
  * @param clientSideRendering - If client side rendering should be enabled.
  * If true the client dist must already be built.
- * @returns A promise that resolves once the http server is up an listening, resolving to that node server.
+ * @returns A promise that resolves once the http server is up an listening,
+ * resolving to that node server.
  */
-export async function start(port: number, clientSideRendering: boolean) {
+export async function start(
+    port: number,
+    clientSideRendering: boolean,
+): Promise<Server> {
     const app = express();
     // app.use(cors);
 

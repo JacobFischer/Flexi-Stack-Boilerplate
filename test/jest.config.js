@@ -1,6 +1,5 @@
 // @ts-check
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve } = require("path");
 
 // For a detailed explanation regarding each configuration property, visit:

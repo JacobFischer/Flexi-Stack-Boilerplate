@@ -44,7 +44,7 @@ describe("Client", () => {
     it("renders on the web page", async (done) => {
         expect(browser).toBeTruthy();
         const page = await browser.newPage();
-        page.on("error", (err) => done.fail(err));
+        page.on("error", (err) => void done.fail(err));
 
         const response = await page.goto(`http://localhost:${PORT}/`);
         expect(response).toBeTruthy();

@@ -58,7 +58,7 @@ describe("Server", () =>
                     );
                     const location = "/";
                     const page = await browser.newPage();
-                    page.on("error", (err) => done.fail(err));
+                    page.on("error", (err) => void done.fail(err));
                     await page.setCacheEnabled(false);
                     await page.setJavaScriptEnabled(false);
 
@@ -122,7 +122,7 @@ describe("Server", () =>
                         enableClientSideRendering,
                     );
                     const page = await browser.newPage();
-                    page.on("error", (err) => done.fail(err));
+                    page.on("error", (err) => void done.fail(err));
 
                     const response = await page.goto(
                         `http://localhost:${port}${route404}`,
