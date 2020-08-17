@@ -1,5 +1,6 @@
 /* eslint-env node */
-import { join, resolve } from "path";
+import { resolve } from "path";
+import urlJoin from "url-join";
 import LoadablePlugin from "@loadable/webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import {
@@ -14,7 +15,7 @@ import babelConfig from "./babel.config";
 export default createWebpackConfiguration(babelConfig, {
     entry: ["core-js", resolve(__dirname, "./index.tsx")],
     output: {
-        filename: join(STATIC_BUNDLE_DIR, "[name].js"),
+        filename: urlJoin(STATIC_BUNDLE_DIR, "[name].js"),
         path: resolve(__dirname, "../../dist/client"),
     },
     plugins: [
