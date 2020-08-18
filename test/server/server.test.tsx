@@ -4,29 +4,13 @@ import puppeteer from "puppeteer";
 import { render } from "../../src/server/render";
 import { getLoadableComponentsStats, start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
+import { SSR_TOKEN } from "../../src/shared/build";
 import { closeServer, isPortTaken } from "../utils";
 
-const LONG_TIMEOUT = 12500; // for long tests that use puppeteer heavily
-
-let browser = (undefined as unknown) as puppeteer.Browser; // will be set first below
-beforeAll(() =>
-    puppeteer.launch().then((b) => {
-        browser = b;
-    }),
-);
-
-afterAll(async () => browser && browser.close());
-
 describe("Server", () =>
-    [
-        ["with only server side rendering", 8080, false] as const,
-        ["with client side rendering", 9090, true] as const,
-        // eslint-disable-next-line jest/valid-describe
-    ].forEach(([description, port, enableClientSideRendering]) =>
-        describe(description, () => {
-            it("has a puppeteer browser", () => {
-                expect(browser).toBeTruthy();
-            });
+    [true, false].forEach((csr) =>
+        describe(`with${csr ? "" : "out"} client side rendering`, () => {
+            const port = 8888 + Number(csr);
 
             it("has a port to bind to", async () => {
                 expect(port).toBeGreaterThan(0);
@@ -35,7 +19,7 @@ describe("Server", () =>
             });
 
             it("starts and closes", async () => {
-                const server = await start(port, enableClientSideRendering);
+                const server = await start(port, csr);
                 expect(server).toBeInstanceOf(Server);
                 expect(server.listening).toBe(true);
 
@@ -49,13 +33,35 @@ describe("Server", () =>
                 expect(portTakenDisconnected).toBe(false);
             });
 
-            it(
-                "serves the page",
-                async (done) => {
-                    const server = await start(
-                        port,
-                        enableClientSideRendering,
-                    );
+            describe("with puppeteer", () => {
+                // will be set first below
+                let browser = (undefined as unknown) as puppeteer.Browser;
+                beforeAll(async () => {
+                    browser = await puppeteer.launch();
+                });
+
+                afterAll(async () => browser && browser.close());
+
+                it("has a puppeteer browser", () => {
+                    expect(browser).toBeTruthy();
+                });
+
+                it(`ssr token is ${csr ? "" : "not "}present`, async () => {
+                    const server = await start(port, csr);
+                    const location = "/";
+                    const page = await browser.newPage();
+                    await page.goto(`http://localhost:${port}${location}`);
+
+                    const evalSSR = await page.evaluate(`window.${SSR_TOKEN}`);
+                    expect(evalSSR).toStrictEqual(csr || undefined);
+
+                    await page.close();
+                    await closeServer(server);
+                });
+
+                // eslint-disable-next-line jest/no-test-callback
+                it("serves the page", async (done) => {
+                    const server = await start(port, csr);
                     const location = "/";
                     const page = await browser.newPage();
                     page.on("error", (err) => void done.fail(err));
@@ -79,48 +85,44 @@ describe("Server", () =>
                             next();
                         },
                     });
-                    const csr = enableClientSideRendering
-                        ? await getLoadableComponentsStats()
-                        : undefined;
 
-                    await render(stream, location, csr);
+                    await render(
+                        stream,
+                        location,
+                        csr ? await getLoadableComponentsStats() : undefined,
+                    );
 
                     // chop off the end, because scripts may exist
                     const renderedHtml = chunks
                         .join("")
-                        .replace(/async/g, `async=""`); // special case, webkit won't allow tagless
+                        // special case, webkit won't allow tagless
+                        .replace(/async/g, `async=""`);
 
                     const pageHtml = await page.content();
                     expect(pageHtml).toEqual(renderedHtml);
 
-                    // expect at least 1 script tag with client side rendering, otherwise none
-                    expect(pageHtml.includes("<script")).toBe(
-                        enableClientSideRendering,
-                    );
+                    // expect at least 1 script tag with client side rendering,
+                    //  otherwise none
+                    expect(pageHtml.includes("<script")).toBe(csr);
 
                     // now test with js to make sure it just renders
                     await page.setJavaScriptEnabled(true);
                     await page.reload();
                     await page.waitFor(1000);
-                    // if an error was thrown with js enabled the on error callback at the start will fail this test
+                    // if an error was thrown with js enabled the on error
+                    // callback at the start will fail this test
 
                     await page.close();
                     await closeServer(server);
                     done();
-                },
-                LONG_TIMEOUT,
-            ); // these are long with puppeteer working
+                });
 
-            it(
-                "serves 404 errors on not found routes",
-                async (done) => {
+                // eslint-disable-next-line jest/no-test-callback
+                it("serves 404 errors on not found routes", async (done) => {
                     const route404 = "/i-should-not/work";
                     expect(routeExists(route404)).toBe(false);
 
-                    const server = await start(
-                        port,
-                        enableClientSideRendering,
-                    );
+                    const server = await start(port, csr);
                     const page = await browser.newPage();
                     page.on("error", (err) => void done.fail(err));
 
@@ -137,8 +139,7 @@ describe("Server", () =>
                     await page.close();
                     await closeServer(server);
                     done();
-                },
-                LONG_TIMEOUT,
-            ); // these are long with puppeteer working
+                });
+            });
         }),
     ));

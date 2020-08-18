@@ -11,7 +11,7 @@ export const Button = styled.button({
  *
  * @returns A functional component that uses state.
  */
-export function StatefullComponent() {
+export function Clicker() {
     const [count, setCount] = useState(0);
 
     return (
@@ -21,3 +21,4 @@ export function StatefullComponent() {
         </div>
     );
 }
+export default Clicker;

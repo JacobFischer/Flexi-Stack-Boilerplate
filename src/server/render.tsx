@@ -4,8 +4,14 @@ import React from "react";
 import { renderToNodeStream } from "react-dom/server";
 import { StaticRouter, StaticRouterContext } from "react-router";
 import { ServerStyleSheet } from "styled-components";
-import { ROOT_ELEMENT_ID, indexHtmlTemplate } from "../shared/build";
+import {
+    indexHtmlTemplate,
+    ROOT_ELEMENT_ID,
+    SSR_TOKEN,
+} from "../shared/build";
 import { App } from "../shared/components/App";
+
+const ssrScript = `<script>window.${SSR_TOKEN}=true;</script>`;
 
 /**
  * Renders the React app in a node (server) environment.
@@ -47,6 +53,7 @@ export async function render(
 
     /* istanbul ignore if: once again, chunks are never found during tests */
     if (extractor) {
+        output.write(ssrScript);
         output.write(extractor.getScriptTags());
     }
 

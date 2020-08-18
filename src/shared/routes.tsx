@@ -2,7 +2,7 @@ import loadable from "@loadable/component";
 import React from "react";
 import { About } from "./components/About";
 import { SomePage } from "./components/SomePage";
-import { StatefullComponent } from "./components/StatefullComponent";
+import { Clicker } from "./components/Clicker";
 
 const Home = loadable(() => import("./components/Home"), {
     fallback: <em>Loading</em>,
@@ -12,7 +12,7 @@ export const routesObject = {
     "/": Home,
     "/about": () => <About creator="Jacob Fischer" />,
     "/some-page": SomePage,
-    "/clicker": StatefullComponent,
+    "/clicker": Clicker,
 };
 
 export const routeExists = (path: string) =>

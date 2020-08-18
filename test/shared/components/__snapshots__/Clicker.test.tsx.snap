@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StatefullComponent component renders 1`] = `
+exports[`Clicker component renders 1`] = `
 <div>
   <p>
     You clicked me 
@@ -8,7 +8,7 @@ exports[`StatefullComponent component renders 1`] = `
      times
   </p>
   <button
-    className="StatefullComponent__Button-sc-1w38m0j-0 dZCZFO"
+    className="Clicker__Button-sc-1nisp1c-0 juzeNF"
     onClick={[Function]}
   >
     Click me
