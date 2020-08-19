@@ -3,6 +3,10 @@ import { resolve } from "path";
 import urlJoin from "url-join";
 import LoadablePlugin from "@loadable/webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
+import TerserJSPlugin from "terser-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import {
     LOADABLE_COMPONENTS_STATS_FILENAME,
     ROOT_ELEMENT_ID,
@@ -13,12 +17,21 @@ import {
 import babelConfig from "./babel.config";
 
 export default createWebpackConfiguration(babelConfig, {
-    entry: ["core-js", resolve(__dirname, "./index.tsx")],
+    entry: ["css-reset-and-normalize", resolve(__dirname, "./index.tsx")],
     output: {
         filename: urlJoin(STATIC_BUNDLE_DIR, "[name].js"),
         path: resolve(__dirname, "../../dist/client"),
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+        ],
+    },
     plugins: [
+        new MiniCssExtractPlugin(),
         new LoadablePlugin({
             filename: LOADABLE_COMPONENTS_STATS_FILENAME,
         }),
@@ -29,5 +42,16 @@ export default createWebpackConfiguration(babelConfig, {
                 indexHtmlTemplate.bottom,
             ].join(""),
         }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: "static",
+            openAnalyzer: false,
+            reportFilename: resolve(
+                __dirname,
+                "../../dist/webpack-bundle-report.html",
+            ),
+        }),
     ],
+    optimization: {
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
 });

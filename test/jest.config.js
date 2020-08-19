@@ -13,7 +13,8 @@ const jestConfig = {
         "(babel|webpack|jest).config.(js|ts)", // config files for frameworks/tools
         ".eslintrc.js", // config file for eslint
         // launchers for client/server. In truth they are tested, but these files are really an entry for webpack
-        "src/(client|server|static)/index.ts(x?)",
+        "src/(server|static)/index.ts(x?)",
+        "src/client/", // client specific files are tested, but webpack bundled. Thus not coverage testable
     ],
     coverageReporters: ["text"],
     coverageThreshold: {
