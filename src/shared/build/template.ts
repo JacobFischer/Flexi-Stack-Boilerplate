@@ -15,6 +15,7 @@ export const indexHtmlTemplate = Object.freeze({
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Flexi-Stack</title>
     </head>
     <body>`),

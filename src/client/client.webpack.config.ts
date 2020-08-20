@@ -16,22 +16,35 @@ import {
 } from "../shared/build";
 import babelConfig from "./babel.config";
 
+const inStaticDir = (dir: string) => urlJoin(STATIC_BUNDLE_DIR, dir);
+
 export default createWebpackConfiguration(babelConfig, {
     entry: ["css-reset-and-normalize", resolve(__dirname, "./index.tsx")],
     output: {
-        filename: urlJoin(STATIC_BUNDLE_DIR, "[name].js"),
+        filename: inStaticDir("[name].js"),
         path: resolve(__dirname, "../../dist/client"),
     },
     module: {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: STATIC_BUNDLE_DIR + "foobar/",
+                        },
+                    },
+                    "css-loader",
+                ],
             },
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: inStaticDir("[name].css"),
+            chunkFilename: inStaticDir("[id].css"),
+        }),
         new LoadablePlugin({
             filename: LOADABLE_COMPONENTS_STATS_FILENAME,
         }),

@@ -54,6 +54,7 @@ export async function render(
     /* istanbul ignore if: once again, chunks are never found during tests */
     if (extractor) {
         output.write(ssrScript);
+        output.write(extractor.getStyleTags());
         output.write(extractor.getScriptTags());
     }
 
