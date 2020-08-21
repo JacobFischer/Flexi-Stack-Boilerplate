@@ -16,7 +16,7 @@ import {
 } from "../shared/build";
 import babelConfig from "./babel.config";
 
-const inStaticDir = (dir: string) => urlJoin(STATIC_BUNDLE_DIR, dir);
+const inStaticDir = (...dirs: string[]) => urlJoin(STATIC_BUNDLE_DIR, ...dirs);
 
 export default createWebpackConfiguration(babelConfig, {
     entry: ["css-reset-and-normalize", resolve(__dirname, "./index.tsx")],
@@ -28,15 +28,7 @@ export default createWebpackConfiguration(babelConfig, {
         rules: [
             {
                 test: /\.css$/i,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: STATIC_BUNDLE_DIR + "foobar/",
-                        },
-                    },
-                    "css-loader",
-                ],
+                use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
             },
         ],
     },
