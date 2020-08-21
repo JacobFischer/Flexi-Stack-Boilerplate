@@ -1,6 +1,8 @@
 import { join } from "path";
-import { createWriteStream, ensureDir } from "fs-extra";
+import { createWriteStream, ensureDir, readdir, copyFile } from "fs-extra";
+import { getChunkStats } from "../server/get-chunk-stats";
 import { render } from "../server/render";
+import { DIST_PATH_CLIENT, STATIC_BUNDLE_DIR } from "../shared/build";
 import { routes } from "../shared/routes";
 
 const silentLog: (...strings: string[]) => void = () => undefined;
@@ -20,8 +22,10 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
         `Starting to build static pages for all ${routesAnd404.length} routes`,
     );
 
-    await Promise.all(
-        routesAnd404.map(async (route) => {
+    const chunkStats = await getChunkStats();
+
+    await Promise.all([
+        ...routesAnd404.map(async (route) => {
             let pathDir = rootDir(route);
             let filename = "index.html";
             if (route === "/404") {
@@ -34,9 +38,31 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
             const pathFile = join(pathDir, filename);
             const fileStream = createWriteStream(pathFile);
 
-            await render(fileStream, route);
+            await render(fileStream, route, chunkStats, false);
 
             log(`  -> Route '${route}' saved to static file '${pathFile}'`);
         }),
-    );
+        (async () => {
+            const clientStaticPath = join(DIST_PATH_CLIENT, STATIC_BUNDLE_DIR);
+            const outputStaticPath = join(outputPath, STATIC_BUNDLE_DIR);
+
+            await ensureDir(outputStaticPath);
+
+            const staticFilenames = await readdir(clientStaticPath);
+            const cssFileNames = staticFilenames.filter((filename) =>
+                filename.endsWith(".css"),
+            );
+
+            await Promise.all(
+                cssFileNames.map((filename) =>
+                    copyFile(
+                        join(clientStaticPath, filename),
+                        join(outputStaticPath, filename),
+                    ),
+                ),
+            );
+
+            log(`  -> Static css files copied to '${outputStaticPath}'`);
+        })(),
+    ]);
 }

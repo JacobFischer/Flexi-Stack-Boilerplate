@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { DIST_PATH_STATIC } from "../shared/build";
 import { buildStaticPages } from "./build";
 
@@ -5,7 +7,7 @@ import { buildStaticPages } from "./build";
 void (async () => {
     try {
         await buildStaticPages(DIST_PATH_STATIC, console.log);
-        console.log("Static website built");
+        console.log("-- Static website built --");
     } catch (err) {
         console.error("Error generating static pages!", err);
         process.exit(1);
