@@ -12,6 +12,6 @@
         // "sourceMap": true,
         "esModuleInterop": true,
         "inlineSourceMap": true,
-        "allowJs": true,
+        "allowJs": true
     }
 }

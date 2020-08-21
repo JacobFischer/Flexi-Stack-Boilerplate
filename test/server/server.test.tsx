@@ -2,7 +2,8 @@ import { Server } from "http";
 import { Writable } from "stream";
 import puppeteer from "puppeteer";
 import { render } from "../../src/server/render";
-import { getLoadableComponentsStats, start } from "../../src/server/start";
+import { getChunkStats } from "../../src/server/get-chunk-stats";
+import { start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
 import { SSR_TOKEN } from "../../src/shared/build";
 import { closeServer, isPortTaken } from "../utils";
@@ -86,11 +87,7 @@ describe("Server", () =>
                         },
                     });
 
-                    await render(
-                        stream,
-                        location,
-                        csr ? await getLoadableComponentsStats() : undefined,
-                    );
+                    await render(stream, location, await getChunkStats(), csr);
 
                     // chop off the end, because scripts may exist
                     const renderedHtml = chunks
