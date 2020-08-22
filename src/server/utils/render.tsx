@@ -8,8 +8,8 @@ import {
     indexHtmlTemplate,
     ROOT_ELEMENT_ID,
     SSR_TOKEN,
-} from "../shared/build";
-import { App } from "../shared/components/App";
+} from "../../shared/build";
+import { App } from "../../shared/components/App";
 
 const ssrScript = `<script>window.${SSR_TOKEN}=true;</script>`;
 

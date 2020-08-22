@@ -7,4 +7,4 @@ import { resolve } from "path";
  * @returns A string of the absolute path at the root.
  */
 export const rootDir = (...paths: string[]) =>
-    resolve(__dirname, "../../", ...paths);
+    resolve(__dirname, "../../../", ...paths);

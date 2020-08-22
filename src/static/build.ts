@@ -1,7 +1,6 @@
 import { join } from "path";
 import { createWriteStream, ensureDir, readdir, copyFile } from "fs-extra";
-import { getChunkStats } from "../server/get-chunk-stats";
-import { render } from "../server/render";
+import { getChunkStats, render } from "../server/utils/";
 import { DIST_PATH_CLIENT, STATIC_BUNDLE_DIR } from "../shared/build";
 import { routes } from "../shared/routes";
 

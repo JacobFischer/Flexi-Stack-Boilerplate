@@ -3,7 +3,7 @@ import { rootDir } from "./root-dir";
 import {
     DIST_PATH_CLIENT,
     LOADABLE_COMPONENTS_STATS_FILENAME,
-} from "../shared/build";
+} from "../../shared/build";
 
 /**
  * Gets the webpack chunks stats for the server to determine loaded chunks.

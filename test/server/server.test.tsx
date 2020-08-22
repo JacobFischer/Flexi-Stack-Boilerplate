@@ -1,8 +1,7 @@
 import { Server } from "http";
 import { Writable } from "stream";
 import puppeteer from "puppeteer";
-import { render } from "../../src/server/render";
-import { getChunkStats } from "../../src/server/get-chunk-stats";
+import { getChunkStats, render } from "../../src/server/utils";
 import { start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
 import { SSR_TOKEN } from "../../src/shared/build";
@@ -12,6 +11,7 @@ describe("Server", () =>
     [true, false].forEach((csr) =>
         describe(`with${csr ? "" : "out"} client side rendering`, () => {
             const port = 8888 + Number(csr);
+            const startOptions = { enableClientSideRendering: csr, port };
 
             it("has a port to bind to", async () => {
                 expect(port).toBeGreaterThan(0);
@@ -20,7 +20,7 @@ describe("Server", () =>
             });
 
             it("starts and closes", async () => {
-                const server = await start(port, csr);
+                const server = await start(startOptions);
                 expect(server).toBeInstanceOf(Server);
                 expect(server.listening).toBe(true);
 
@@ -48,7 +48,7 @@ describe("Server", () =>
                 });
 
                 it(`ssr token is ${csr ? "" : "not "}present`, async () => {
-                    const server = await start(port, csr);
+                    const server = await start(startOptions);
                     const location = "/";
                     const page = await browser.newPage();
                     await page.goto(`http://localhost:${port}${location}`);
@@ -62,7 +62,7 @@ describe("Server", () =>
 
                 // eslint-disable-next-line jest/no-test-callback
                 it("serves the page", async (done) => {
-                    const server = await start(port, csr);
+                    const server = await start(startOptions);
                     const location = "/";
                     const page = await browser.newPage();
                     page.on("error", (err) => void done.fail(err));
@@ -119,7 +119,7 @@ describe("Server", () =>
                     const route404 = "/i-should-not/work";
                     expect(routeExists(route404)).toBe(false);
 
-                    const server = await start(port, csr);
+                    const server = await start(startOptions);
                     const page = await browser.newPage();
                     page.on("error", (err) => void done.fail(err));
 
