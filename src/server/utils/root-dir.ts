@@ -1,4 +1,6 @@
-import { resolve } from "path";
+import { resolve, join } from "path";
+
+const root = resolve("./");
 
 /**
  * Resolves some path(s) to the root directory.
@@ -6,5 +8,4 @@ import { resolve } from "path";
  * @param paths - Variadic args to append to the path.
  * @returns A string of the absolute path at the root.
  */
-export const rootDir = (...paths: string[]) =>
-    resolve(__dirname, "../../../", ...paths);
+export const rootDir = (...paths: string[]) => join(root, ...paths);
