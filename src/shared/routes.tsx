@@ -11,7 +11,7 @@ const Home = loadable(() => import("./components/Home"), {
 export const routesObject = {
     "/": Home,
     "/about": () => <About creator="Jacob Fischer" />,
-    "/some-page": SomePage,
+    "/some/page": SomePage,
     "/clicker": Clicker,
 };
 

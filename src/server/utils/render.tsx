@@ -50,6 +50,7 @@ export async function render(
     );
 
     const jsx = extractor.collectChunks(sheet.collectStyles(jsxElement));
+    // TODO: renderToStaticNodeStream for static renders
     const bodyStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
     bodyStream.pipe(output, { end: false });
     await new Promise((resolve) => bodyStream.once("end", resolve));
