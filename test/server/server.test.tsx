@@ -1,6 +1,7 @@
 import { Server } from "http";
 import { Writable } from "stream";
 import puppeteer from "puppeteer";
+import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
 import { getChunkStats, render } from "../../src/server/utils";
 import { start } from "../../src/server/start";
 import { routeExists } from "../../src/shared/routes";
@@ -36,7 +37,7 @@ describe("Server", () =>
 
             describe("with puppeteer", () => {
                 // will be set first below
-                let browser = (undefined as unknown) as puppeteer.Browser;
+                let browser = (undefined as unknown) as Browser;
                 beforeAll(async () => {
                     browser = await puppeteer.launch();
                 });
@@ -60,7 +61,7 @@ describe("Server", () =>
                     await closeServer(server);
                 });
 
-                // eslint-disable-next-line jest/no-test-callback
+                // eslint-disable-next-line jest/no-done-callback
                 it("serves the page", async (done) => {
                     const server = await start(startOptions);
                     const location = "/";
@@ -73,11 +74,7 @@ describe("Server", () =>
                         `http://localhost:${port}${location}`,
                     );
                     expect(response).toBeTruthy();
-                    if (response) {
-                        expect(response.status()).toStrictEqual(200);
-                    } else {
-                        throw new Error("No response!");
-                    }
+                    expect(response && response.status()).toStrictEqual(200);
 
                     const chunks = new Array<string>();
                     const stream = new Writable({
@@ -105,7 +102,7 @@ describe("Server", () =>
                     // now test with js to make sure it just renders
                     await page.setJavaScriptEnabled(true);
                     await page.reload();
-                    await page.waitFor(1000);
+                    await page.waitForTimeout(1000);
                     // if an error was thrown with js enabled the on error
                     // callback at the start will fail this test
 
@@ -114,7 +111,7 @@ describe("Server", () =>
                     done();
                 });
 
-                // eslint-disable-next-line jest/no-test-callback
+                // eslint-disable-next-line jest/no-done-callback
                 it("serves 404 errors on not found routes", async (done) => {
                     const route404 = "/i-should-not/work";
                     expect(routeExists(route404)).toBe(false);
@@ -127,11 +124,7 @@ describe("Server", () =>
                         `http://localhost:${port}${route404}`,
                     );
                     expect(response).toBeTruthy();
-                    if (response) {
-                        expect(response.status()).toStrictEqual(404);
-                    } else {
-                        throw new Error("No response!");
-                    }
+                    expect(response && response.status()).toStrictEqual(404);
 
                     await page.close();
                     await closeServer(server);

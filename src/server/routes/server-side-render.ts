@@ -10,6 +10,6 @@ export default async (opts: { enableClientSideRendering: boolean }) => {
         }
 
         const csr = Boolean(opts.enableClientSideRendering);
-        return render(res, req.url, chunkStats, csr);
+        void render(res, req.url, chunkStats, csr);
     });
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 export const Button = styled.button({
@@ -12,12 +12,15 @@ export const Button = styled.button({
  * @returns A functional component that uses state.
  */
 export function Clicker() {
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
+    const count = -1;
 
     return (
         <div>
             <p>You clicked me {count} times</p>
-            <Button onClick={() => setCount(count + 1)}>Click me</Button>
+            <Button onClick={undefined /*() => setCount(count + 1)*/}>
+                Click me
+            </Button>
         </div>
     );
 }

@@ -3,6 +3,7 @@ import { join } from "path";
 import express from "express";
 import { stat } from "fs-extra";
 import puppeteer from "puppeteer";
+import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
 import {
     closeServer,
     getClientDistDir,
@@ -11,7 +12,7 @@ import {
 } from "../utils";
 
 const PORT = 8888;
-let browser = (undefined as unknown) as puppeteer.Browser;
+let browser = (undefined as unknown) as Browser;
 let server = (undefined as unknown) as Server;
 beforeAll(() =>
     Promise.all([
@@ -40,7 +41,7 @@ describe("Client", () => {
         expect(await isPortTaken(PORT)).toBe(true);
     });
 
-    /* eslint-disable-next-line jest/no-test-callback */
+    /* eslint-disable-next-line jest/no-done-callback */
     it("renders on the web page", async (done) => {
         expect(browser).toBeTruthy();
         const page = await browser.newPage();

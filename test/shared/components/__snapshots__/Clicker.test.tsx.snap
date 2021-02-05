@@ -4,12 +4,11 @@ exports[`Clicker component renders 1`] = `
 <div>
   <p>
     You clicked me 
-    0
+    -1
      times
   </p>
   <button
-    className="Clicker__Button-sc-1nisp1c-0 juzeNF"
-    onClick={[Function]}
+    className="Clicker__Button-sc-1nisp1c-0 kVvypr"
   >
     Click me
   </button>
