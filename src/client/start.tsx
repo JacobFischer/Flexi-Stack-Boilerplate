@@ -3,7 +3,7 @@ import React from "react";
 import { hydrate, render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ROOT_ELEMENT_ID, SSR_TOKEN } from "../shared/build";
-import { App } from "../shared/components/App";
+import { Body, Head } from "../shared/app";
 
 const safeWindow = window as typeof window & Record<string, unknown>;
 const ssr = safeWindow[SSR_TOKEN];
@@ -17,7 +17,8 @@ void (async () => {
 
     reactRender(
         <BrowserRouter>
-            <App />
+            <Head />
+            <Body />
         </BrowserRouter>,
         document.getElementById(ROOT_ELEMENT_ID),
     );

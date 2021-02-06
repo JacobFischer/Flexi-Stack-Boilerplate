@@ -43,7 +43,7 @@ Invalid to use in Webpack`);
 };
 
 export default createWebpackConfiguration(babelConfig, {
-    entry: ["css-reset-and-normalize", resolve(__dirname, "./index.tsx")],
+    entry: ["css-reset-and-normalize", resolve(__dirname, "./entry.tsx")],
     output: {
         filename: inStaticDir("[name].js"),
         path: resolve(__dirname, "../../dist/client"),
