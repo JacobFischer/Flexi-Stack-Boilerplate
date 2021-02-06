@@ -31,10 +31,10 @@ Array [
     </li>
     <li>
       <a
-        href="/some-page"
+        href="/some/page"
         onClick={[Function]}
       >
-        /some-page
+        /some/page
       </a>
     </li>
     <li>
@@ -90,10 +90,10 @@ Array [
     </li>
     <li>
       <a
-        href="/some-page"
+        href="/some/page"
         onClick={[Function]}
       >
-        /some-page
+        /some/page
       </a>
     </li>
     <li>
@@ -146,10 +146,10 @@ Array [
     </li>
     <li>
       <a
-        href="/some-page"
+        href="/some/page"
         onClick={[Function]}
       >
-        /some-page
+        /some/page
       </a>
     </li>
     <li>
@@ -201,10 +201,10 @@ Array [
     </li>
     <li>
       <a
-        href="/some-page"
+        href="/some/page"
         onClick={[Function]}
       >
-        /some-page
+        /some/page
       </a>
     </li>
     <li>
@@ -216,17 +216,12 @@ Array [
       </a>
     </li>
   </ul>,
-  <h3>
-    SomePage
-  </h3>,
-  <p>
-    This is just some random page.
-  </p>,
-  <p>
-    <em>
-      I hope this gives you an idea of where to go with this project!
-    </em>
-  </p>,
+  <h2>
+    Not Found
+  </h2>,
+  <pre>
+    Sorry, but we couldn't find anything here!
+  </pre>,
 ]
 `;
 
@@ -261,10 +256,10 @@ Array [
     </li>
     <li>
       <a
-        href="/some-page"
+        href="/some/page"
         onClick={[Function]}
       >
-        /some-page
+        /some/page
       </a>
     </li>
     <li>
