@@ -25,7 +25,6 @@ export const indexHtmlTemplate = Object.freeze({
 `),
     endHeadStartBody: unIndent(`
         <style>${globalStyleString}</style>
-        <!-- testing -->
     </head>
     <body>`),
     end: unIndent(`

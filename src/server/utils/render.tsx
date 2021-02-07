@@ -1,8 +1,11 @@
 import { Writable } from "stream";
 import { ChunkExtractor } from "@loadable/server";
 import React from "react";
-import { renderToNodeStream } from "react-dom/server";
-import { StaticRouter, StaticRouterContext } from "react-router";
+import {
+    renderToNodeStream,
+    renderToStaticNodeStream,
+} from "react-dom/server";
+import { StaticRouter } from "react-router";
 import { ServerStyleSheet } from "styled-components";
 import {
     indexHtmlTemplate,
@@ -42,19 +45,17 @@ export async function render(
 ) {
     output.write(indexHtmlTemplate.start);
 
-    const headStream = renderToNodeStream(
+    const renderToStream = enableClientSideRendering
+        ? renderToNodeStream
+        : renderToStaticNodeStream;
+
+    const headStream = renderToStream(
         <StaticRouter location={location}>
             <Head />
         </StaticRouter>,
     );
 
-    /*
-    bodyStream.pipe(output, { end: false });
-    await new Promise((resolve) => bodyStream.once("end", resolve));
-    */
-
     const stream = streamedPromise(output);
-
     await stream(headStream);
 
     output.write(indexHtmlTemplate.endHeadStartBody);
@@ -70,7 +71,7 @@ export async function render(
     );
     const jsx = extractor.collectChunks(sheet.collectStyles(jsxRaw));
     // TODO: renderToStaticNodeStream for static renders
-    const bodyStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
+    const bodyStream = sheet.interleaveWithNodeStream(renderToStream(jsx));
     await stream(bodyStream);
 
     output.write(extractor.getStyleTags());
