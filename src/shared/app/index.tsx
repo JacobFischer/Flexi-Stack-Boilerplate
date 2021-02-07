@@ -1,2 +1,3 @@
-export { Body } from "./Body";
-export { Head } from "./Head";
+export * from "./Body";
+export * from "./Head";
+export * from "./routes";

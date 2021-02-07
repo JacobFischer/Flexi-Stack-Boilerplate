@@ -1,9 +1,15 @@
-/**
- * Un-indents text from 4 spaces, newlines, and tabs to nothing.
- *
- * @param str - The string to un-indent.
- * @returns The string without 4 spaces, newlines, or tabs.
- */
+import { css } from "styled-components";
+
+const globalStyle = css({
+    body: {
+        backgroundColor: "lightgrey",
+        fontSize: "16px",
+        padding: "1rem",
+    },
+});
+
+const globalStyleString = globalStyle.join("");
+
 const unIndent = (str: string) => str.replace(/ {4}|\n|\t/g, "");
 
 /**
@@ -11,16 +17,18 @@ const unIndent = (str: string) => str.replace(/ {4}|\n|\t/g, "");
  * build scripts to maintain the same html skeleton.
  */
 export const indexHtmlTemplate = Object.freeze({
-    top: unIndent(`
+    start: unIndent(`
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Flexi-Stack</title>
+`),
+    endHeadStartBody: unIndent(`
+        <style>${globalStyleString}</style>
+        <!-- testing -->
     </head>
     <body>`),
-    bottom: unIndent(`
+    end: unIndent(`
     </body>
-</html>
-`),
+</html>`),
 });

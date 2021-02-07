@@ -9,7 +9,7 @@ const distRoot = (...paths: string[]) =>
     resolve(__dirname, "../../", ...paths);
 
 export default createWebpackConfiguration(babelConfig, {
-    entry: [resolve(__dirname, "./index.tsx")],
+    entry: [resolve(__dirname, "./entry.tsx")],
     // we don't want to bundle node_modules (external modules)
     externals: [nodeExternals()],
     output: {

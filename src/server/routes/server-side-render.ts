@@ -1,15 +1,17 @@
 import { Router } from "express";
+import StatusCodes from "http-status-codes";
 import { getChunkStats, render } from "../utils";
-import { routeExists } from "../../shared/routes";
+import { matchingRoute } from "../../shared/app/routes";
 
 export default async (opts: { enableClientSideRendering: boolean }) => {
     const chunkStats = await getChunkStats();
+    const csr = Boolean(opts.enableClientSideRendering);
+
     return Router().get("*", (req, res) => {
-        if (!routeExists(req.url)) {
-            res.status(404);
+        if (!matchingRoute(req.url)) {
+            res.status(StatusCodes.NOT_FOUND);
         }
 
-        const csr = Boolean(opts.enableClientSideRendering);
         void render(res, req.url, chunkStats, csr);
     });
 };

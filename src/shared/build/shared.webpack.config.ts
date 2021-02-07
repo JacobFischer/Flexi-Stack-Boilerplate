@@ -9,7 +9,8 @@ export const createWebpackConfiguration = (
 ) => (env: undefined, argv: Configuration): Configuration =>
     webpackMerge(
         {
-            devtool: argv.mode === "development" ? "inline-source-map" : false,
+            devtool:
+                argv.mode === "development" ? "eval-cheap-source-map" : false,
             module: {
                 rules: [
                     {
@@ -25,7 +26,17 @@ export const createWebpackConfiguration = (
                             },
                         ],
                     },
+                    /*
+                    {
+                        test: /\.js$/,
+                        enforce: "pre",
+                        use: ["source-map-loader"],
+                    },
+                    */
                 ],
+            },
+            output: {
+                sourceMapFilename: "[name].js.map",
             },
             optimization: {
                 sideEffects: true,

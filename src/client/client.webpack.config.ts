@@ -72,9 +72,10 @@ export default createWebpackConfiguration(babelConfig, {
         }),
         new HtmlWebpackPlugin({
             templateContent: [
-                indexHtmlTemplate.top,
+                indexHtmlTemplate.start,
+                indexHtmlTemplate.endHeadStartBody,
                 `<div id="${ROOT_ELEMENT_ID}"></div>`,
-                indexHtmlTemplate.bottom,
+                indexHtmlTemplate.end,
             ].join(""),
         }),
         new BundleAnalyzerPlugin({

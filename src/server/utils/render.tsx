@@ -9,9 +9,18 @@ import {
     ROOT_ELEMENT_ID,
     SSR_TOKEN,
 } from "../../shared/build";
-import { App } from "../../shared/components/App";
+import { Body, Head } from "../../shared/app";
 
 const ssrScript = `<script>window.${SSR_TOKEN}=true;</script>`;
+
+const streamedPromise = (output: Writable) => (
+    stream: NodeJS.ReadableStream,
+) =>
+    new Promise((resolve, reject) => {
+        stream.pipe(output, { end: false });
+        stream.once("end", resolve);
+        stream.once("error", reject);
+    });
 
 /**
  * Renders the React app in a node (server) environment.
@@ -31,29 +40,38 @@ export async function render(
     chunkStats: Record<string, unknown>,
     enableClientSideRendering: boolean,
 ) {
-    output.write(indexHtmlTemplate.top);
+    output.write(indexHtmlTemplate.start);
+
+    const headStream = renderToNodeStream(
+        <StaticRouter location={location}>
+            <Head />
+        </StaticRouter>,
+    );
+
+    /*
+    bodyStream.pipe(output, { end: false });
+    await new Promise((resolve) => bodyStream.once("end", resolve));
+    */
+
+    const stream = streamedPromise(output);
+
+    await stream(headStream);
+
+    output.write(indexHtmlTemplate.endHeadStartBody);
 
     const sheet = new ServerStyleSheet();
-    // normally we"d use a StaticRouter context to capture if the rendered route
-    // was a 404 not found; however we are streaming this response.
-    // So the HTTP Status Code has already been sent,
-    // thus we don"t care at this point in time.
-    const staticRouterContext: StaticRouterContext = {};
-
     const extractor = new ChunkExtractor({ stats: chunkStats });
-    const jsxElement = (
+    const jsxRaw = (
         <div id={ROOT_ELEMENT_ID}>
-            <StaticRouter location={location} context={staticRouterContext}>
-                <App />
+            <StaticRouter location={location}>
+                <Body />
             </StaticRouter>
         </div>
     );
-
-    const jsx = extractor.collectChunks(sheet.collectStyles(jsxElement));
+    const jsx = extractor.collectChunks(sheet.collectStyles(jsxRaw));
     // TODO: renderToStaticNodeStream for static renders
     const bodyStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx));
-    bodyStream.pipe(output, { end: false });
-    await new Promise((resolve) => bodyStream.once("end", resolve));
+    await stream(bodyStream);
 
     output.write(extractor.getStyleTags());
 
@@ -63,5 +81,5 @@ export async function render(
         output.write(extractor.getScriptTags());
     }
 
-    output.end(indexHtmlTemplate.bottom);
+    output.end(indexHtmlTemplate.end);
 }

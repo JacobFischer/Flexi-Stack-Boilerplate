@@ -1,6 +1,7 @@
 import { loadableReady } from "@loadable/component";
 import React from "react";
 import { hydrate, render } from "react-dom";
+import { Helmet } from "react-helmet";
 import { BrowserRouter } from "react-router-dom";
 import { ROOT_ELEMENT_ID, SSR_TOKEN } from "../shared/build";
 import { Body, Head } from "../shared/app";
@@ -17,7 +18,7 @@ void (async () => {
 
     reactRender(
         <BrowserRouter>
-            <Head />
+            <Head Wrapper={Helmet} />
             <Body />
         </BrowserRouter>,
         document.getElementById(ROOT_ELEMENT_ID),

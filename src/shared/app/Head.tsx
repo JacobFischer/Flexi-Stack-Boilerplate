@@ -1,26 +1,18 @@
 // This is the main entry point into the app
 import React from "react";
-import { css } from "styled-components";
-import { Helmet } from "react-helmet";
 import { Routes } from "./routes";
 import { useLocation, StaticRouter } from "react-router-dom";
 import { renderToStaticMarkup } from "react-dom/server";
 
-const globalStyle = css({
-    body: {
-        backgroundColor: "lightgrey",
-        fontSize: "16px",
-        padding: "1rem",
-    },
-});
-
-const globalStyleString = globalStyle.join("");
-
-export const Head: React.FunctionComponent = () => {
+export const Head: React.FunctionComponent<{
+    // TODO: this is kind of hack-y. react-helmet MUST have head children as
+    // direct children,
+    Wrapper?: React.ElementType;
+}> = ({ Wrapper = React.Fragment }) => {
     // Ideally we could nest react-router route matches in the title
     // however, react-helmet **only** permits strings at the moment,
     // no other react nodes.
-    // So, we'll just manually render out the title first here
+    // So, we'll just manually render out the title here to make it happy
     const title = renderToStaticMarkup(
         <StaticRouter location={useLocation()}>
             <Routes render={({ title }) => title}></Routes>
@@ -28,9 +20,8 @@ export const Head: React.FunctionComponent = () => {
     );
 
     return (
-        <Helmet>
+        <Wrapper>
             <title>{title}</title>
-            <style>{globalStyleString}</style>
-        </Helmet>
+        </Wrapper>
     );
 };
