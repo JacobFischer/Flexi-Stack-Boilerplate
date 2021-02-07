@@ -1,5 +1,5 @@
 import React from "react";
-import PageWrapper from "../components/PageWrapper";
+import PageWrapper from "../../components/PageWrapper";
 
 export const route = "/";
 export const title = "Home Page";

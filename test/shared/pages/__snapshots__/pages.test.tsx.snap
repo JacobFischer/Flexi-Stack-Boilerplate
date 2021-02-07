@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`all pages page '404 Not Found' renders 1`] = `
+<div>
+  404 Not Found
+</div>
+`;
+
+exports[`all pages page '404 Not Found' renders as an App page 1`] = `
+<html>
+  <head>
+    <title>
+      404 Not Found
+    </title>
+  </head>
+  <body>
+    <div>
+      404 Not Found
+    </div>
+  </body>
+</html>
+`;
+
+exports[`all pages page 'About' renders 1`] = `
+<div
+  className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+>
+  <h1
+    className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+  >
+    About
+  </h1>
+  <ul
+    className="NavBar__List-sc-10ckilk-0 bUmSUd"
+  >
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+    </li>
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/about"
+        onClick={[Function]}
+      >
+        About
+      </a>
+    </li>
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/nowhere"
+        onClick={[Function]}
+      >
+        Nowhere
+      </a>
+    </li>
+  </ul>
+  <section>
+    <div>
+      About my boy
+    </div>
+  </section>
+</div>
+`;
+
+exports[`all pages page 'About' renders as an App page 1`] = `
+<html>
+  <head>
+    <title>
+      About
+    </title>
+  </head>
+  <body>
+    <div
+      className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+    >
+      <h1
+        className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+      >
+        About
+      </h1>
+      <ul
+        className="NavBar__List-sc-10ckilk-0 bUmSUd"
+      >
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/about"
+            onClick={[Function]}
+          >
+            About
+          </a>
+        </li>
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/nowhere"
+            onClick={[Function]}
+          >
+            Nowhere
+          </a>
+        </li>
+      </ul>
+      <section>
+        <div>
+          About my boy
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`all pages page 'Home Page' renders 1`] = `
+<div
+  className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+>
+  <h1
+    className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+  >
+    Home Page
+  </h1>
+  <ul
+    className="NavBar__List-sc-10ckilk-0 bUmSUd"
+  >
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+    </li>
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/about"
+        onClick={[Function]}
+      >
+        About
+      </a>
+    </li>
+    <li
+      className="NavBar__Item-sc-10ckilk-1 dCnps"
+    >
+      <a
+        href="/nowhere"
+        onClick={[Function]}
+      >
+        Nowhere
+      </a>
+    </li>
+  </ul>
+  <section>
+    <div>
+      Hello world from the app!
+    </div>
+  </section>
+</div>
+`;
+
+exports[`all pages page 'Home Page' renders as an App page 1`] = `
+<html>
+  <head>
+    <title>
+      Home Page
+    </title>
+  </head>
+  <body>
+    <div
+      className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+    >
+      <h1
+        className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+      >
+        Home Page
+      </h1>
+      <ul
+        className="NavBar__List-sc-10ckilk-0 bUmSUd"
+      >
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/about"
+            onClick={[Function]}
+          >
+            About
+          </a>
+        </li>
+        <li
+          className="NavBar__Item-sc-10ckilk-1 dCnps"
+        >
+          <a
+            href="/nowhere"
+            onClick={[Function]}
+          >
+            Nowhere
+          </a>
+        </li>
+      </ul>
+      <section>
+        <div>
+          Hello world from the app!
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+`;

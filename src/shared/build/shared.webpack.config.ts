@@ -26,13 +26,6 @@ export const createWebpackConfiguration = (
                             },
                         ],
                     },
-                    /*
-                    {
-                        test: /\.js$/,
-                        enforce: "pre",
-                        use: ["source-map-loader"],
-                    },
-                    */
                 ],
             },
             output: {

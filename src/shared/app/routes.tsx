@@ -1,18 +1,7 @@
 import React from "react";
 import { Route, StaticRouter, Switch } from "react-router-dom";
 import { renderToStaticMarkup } from "react-dom/server";
-import * as pages from "../pages";
-import * as notFound from "../pages/404";
-
-type PageExport = {
-    title: string;
-    route: string;
-    Component: React.FunctionComponent;
-};
-
-const pagesList: PageExport[] = Object.values(pages).sort((a, b) =>
-    a.route.localeCompare(b.route),
-);
+import { pagesList, pageNotFound } from "../pages";
 
 /**
  * Lol wut.
@@ -22,7 +11,7 @@ const pagesList: PageExport[] = Object.values(pages).sort((a, b) =>
  * @returns Stuff.
  */
 export const Routes = <T extends React.ReactNode>(props: {
-    render: (page: PageExport, matchedRoute: boolean) => T;
+    render: (page: typeof pagesList[number], matchedRoute: boolean) => T;
 }) => (
     <Switch>
         {pagesList.map((page) => (
@@ -33,7 +22,7 @@ export const Routes = <T extends React.ReactNode>(props: {
                 render={() => props.render(page, true)}
             />
         ))}
-        <Route render={() => props.render(notFound, false)} />
+        <Route render={() => props.render(pageNotFound, false)} />
     </Switch>
 );
 

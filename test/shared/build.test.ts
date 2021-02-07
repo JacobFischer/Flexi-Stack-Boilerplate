@@ -30,8 +30,11 @@ describe("indexHtmlTemplate template", () => {
         expect(typeof build.indexHtmlTemplate).toBe("object");
     });
 
-    const htmlTemplate =
-        build.indexHtmlTemplate.top + build.indexHtmlTemplate.bottom;
+    const htmlTemplate = [
+        build.indexHtmlTemplate.start,
+        build.indexHtmlTemplate.endHeadStartBody,
+        build.indexHtmlTemplate.end,
+    ].join("");
 
     for (const [part, value] of Object.entries(build.indexHtmlTemplate)) {
         it(`${part} should be a string`, () => {

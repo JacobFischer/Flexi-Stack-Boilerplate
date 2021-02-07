@@ -12,8 +12,8 @@ const jestConfig = {
         "\\\\node_modules\\\\", // do not test external modules
         "(babel|webpack|jest).config.(js|ts)", // config files for frameworks/tools
         ".eslintrc.js", // config file for eslint
-        // launchers for client/server. In truth they are tested, but these files are really an entry for webpack
-        "src/(server|static)/index.(j|t)s(x?)",
+        // files for client/server entry-points. In truth they are tested, but these files are really primarily an entry for webpack running
+        "src/(server|static)/(entry|index).(j|t)s(x?)",
         "src/client/", // client specific files are tested, but webpack bundled. Thus not coverage testable
     ],
     coverageReporters: ["text"],

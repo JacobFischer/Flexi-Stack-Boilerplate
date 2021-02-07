@@ -2,7 +2,7 @@ import { join } from "path";
 import { createWriteStream, ensureDir, readdir, copyFile } from "fs-extra";
 import { getChunkStats, render } from "../server/utils/";
 import { DIST_PATH_CLIENT, STATIC_BUNDLE_DIR } from "../shared/build";
-import { routes } from "../shared/routes";
+import { pagesList } from "../shared/pages";
 
 const silentLog: (...strings: string[]) => void = () => undefined;
 
@@ -15,7 +15,7 @@ const silentLog: (...strings: string[]) => void = () => undefined;
  */
 export async function buildStaticPages(outputPath: string, log = silentLog) {
     const rootDir = (...paths: string[]) => join(outputPath, ...paths);
-    const routesAnd404 = ["/404", ...routes.map(([route]) => route)];
+    const routesAnd404 = ["/404", ...pagesList.map(({ route }) => route)];
 
     log(
         `Starting to build static pages for all ${routesAnd404.length} routes`,

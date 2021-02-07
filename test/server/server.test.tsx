@@ -4,7 +4,7 @@ import puppeteer from "puppeteer";
 import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
 import { getChunkStats, render } from "../../src/server/utils";
 import { start } from "../../src/server/start";
-import { routeExists } from "../../src/shared/routes";
+import { matchingRoute } from "../../src/shared/app/routes";
 import { SSR_TOKEN } from "../../src/shared/build";
 import { closeServer, isPortTaken } from "../utils";
 
@@ -114,7 +114,7 @@ describe("Server", () =>
                 // eslint-disable-next-line jest/no-done-callback
                 it("serves 404 errors on not found routes", async (done) => {
                     const route404 = "/i-should-not/work";
-                    expect(routeExists(route404)).toBe(false);
+                    expect(matchingRoute(route404)).toBe(false);
 
                     const server = await start(startOptions);
                     const page = await browser.newPage();

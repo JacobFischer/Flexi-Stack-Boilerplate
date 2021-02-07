@@ -1,6 +1,6 @@
 import { join, resolve } from "path";
 import { emptyDir, ensureDir, readdir, remove, stat } from "fs-extra";
-import { routes } from "../../src/shared/routes";
+import { pagesList } from "../../src/shared/pages";
 import { buildStaticPages } from "../../src/static/build";
 
 const TEMP_DIR = resolve(__dirname, "../../temp/");
@@ -33,7 +33,7 @@ describe("Static site generation", () => {
         expect(postFiles).toContain("404.html");
 
         await Promise.all(
-            routes.map(async ([route]) => {
+            pagesList.map(async ({ route }) => {
                 const staticPath = join(OUTPUT_DIR, route, "index.html");
                 const fileStats = await stat(staticPath);
                 expect(fileStats.isFile()).toBe(true);
