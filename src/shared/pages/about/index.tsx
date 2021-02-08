@@ -1,7 +1,7 @@
 import React from 'react';
 import PageWrapper from '../../components/PageWrapper';
 
-export const route = '/about';
+export * from './route';
 export const title = 'About';
 export const Component: React.FunctionComponent = () => (
   <PageWrapper title={title}>

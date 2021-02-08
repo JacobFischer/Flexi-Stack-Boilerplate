@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { route as routeAbout } from '../pages/about/route';
+import { route as routeHome } from '../pages/home/route';
+
 const List = styled.ul({
   backgroundColor: 'darkgreen',
 });
@@ -16,10 +19,10 @@ const Item = styled.li({
 const NavBar: React.FunctionComponent = () => (
   <List>
     <Item>
-      <Link to="/">Home</Link>
+      <Link to={routeHome}>Home</Link>
     </Item>
     <Item>
-      <Link to="/about">About</Link>
+      <Link to={routeAbout}>About</Link>
     </Item>
     <Item>
       <Link to="/nowhere">Nowhere</Link>
