@@ -60,7 +60,7 @@
     "css-minimizer-webpack-plugin": "1.2.0",
     "css-reset-and-normalize": "2.3.5",
     "eslint": "7.19.0",
-    "eslint-config-jacobfischer": "git://github.com/JacobFischer/eslint-config.git#0d977dd1d6def53d2d145b1f5bbb829495dcbd8b",
+    "eslint-config-jacobfischer": "git://github.com/JacobFischer/eslint-config.git#d3ecf89151932989003e837dd11fd8d0715d5a69",
     "eslint-config-jacobfischer-jest": "git://github.com/JacobFischer/eslint-config-jest.git#4cbb83846d4e1a29e95b406ed5d957bdab6b0824",
     "eslint-config-jacobfischer-react": "git://github.com/JacobFischer/eslint-config-react.git#78e497042a4a7e17bec76b475674ef9386ab9cf7",
     "eslint-plugin-import": "2.22.1",

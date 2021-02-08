@@ -1,7 +1,7 @@
-import React from "react";
-import { Route, StaticRouter, Switch } from "react-router-dom";
-import { renderToStaticMarkup } from "react-dom/server";
-import { pagesList, pageNotFound } from "../pages";
+import React from 'react';
+import { Route, StaticRouter, Switch } from 'react-router-dom';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { pagesList, pageNotFound } from '../pages';
 
 /**
  * Lol wut.
@@ -11,19 +11,19 @@ import { pagesList, pageNotFound } from "../pages";
  * @returns Stuff.
  */
 export const Routes = <T extends React.ReactNode>(props: {
-    render: (page: typeof pagesList[number], matchedRoute: boolean) => T;
+  render: (page: typeof pagesList[number], matchedRoute: boolean) => T;
 }) => (
-    <Switch>
-        {pagesList.map((page) => (
-            <Route
-                key={page.route}
-                exact
-                path={page.route}
-                render={() => props.render(page, true)}
-            />
-        ))}
-        <Route render={() => props.render(pageNotFound, false)} />
-    </Switch>
+  <Switch>
+    {pagesList.map((page) => (
+      <Route
+        key={page.route}
+        exact
+        path={page.route}
+        render={() => props.render(page, true)}
+      />
+    ))}
+    <Route render={() => props.render(pageNotFound, false)} />
+  </Switch>
 );
 
 /**
@@ -33,12 +33,12 @@ export const Routes = <T extends React.ReactNode>(props: {
  * @returns True if a match was made, false otherwise.
  */
 export function matchingRoute(location: string): boolean {
-    const matchedRoute = renderToStaticMarkup(
-        <StaticRouter location={location}>
-            <Routes render={(_, matchedRoute) => String(matchedRoute)} />
-        </StaticRouter>,
-    );
+  const matchedRoute = renderToStaticMarkup(
+    <StaticRouter location={location}>
+      <Routes render={(_, matchedRoute) => String(matchedRoute)} />
+    </StaticRouter>,
+  );
 
-    // boolean was transformed to a string via the quick react render above
-    return matchedRoute == String(true);
+  // boolean was transformed to a string via the quick react render above
+  return matchedRoute == String(true);
 }

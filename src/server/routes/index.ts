@@ -1,4 +1,4 @@
-import staticRoute from "./static";
-import ssr from "./server-side-render";
+import staticRoute from './static';
+import ssr from './server-side-render';
 
-export default { route: "/", handlers: [staticRoute, ssr] };
+export default { route: '/', handlers: [staticRoute, ssr] };

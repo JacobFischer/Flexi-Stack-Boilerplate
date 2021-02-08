@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const DarkBlue = styled.h1({
-    color: "darkblue",
-    fontSize: "2rem",
-    fontWeight: "bold",
+  color: 'darkblue',
+  fontSize: '2rem',
+  fontWeight: 'bold',
 });
 
 /**
@@ -14,7 +14,7 @@ const DarkBlue = styled.h1({
  * @returns A functional react component.
  */
 const Header = <P extends unknown>(props: React.PropsWithChildren<P>) => (
-    <DarkBlue {...props} />
+  <DarkBlue {...props} />
 );
 
 export default Header;

@@ -1,29 +1,29 @@
-import { Writable } from "stream";
-import { ChunkExtractor } from "@loadable/server";
-import React from "react";
+import { Writable } from 'stream';
+import { ChunkExtractor } from '@loadable/server';
+import React from 'react';
 import {
-    renderToNodeStream,
-    renderToStaticNodeStream,
-} from "react-dom/server";
-import { StaticRouter } from "react-router";
-import { ServerStyleSheet } from "styled-components";
+  renderToNodeStream,
+  renderToStaticNodeStream,
+} from 'react-dom/server';
+import { StaticRouter } from 'react-router';
+import { ServerStyleSheet } from 'styled-components';
 import {
-    indexHtmlTemplate,
-    ROOT_ELEMENT_ID,
-    SSR_TOKEN,
-} from "../../shared/build";
-import { Body, Head } from "../../shared/app";
+  indexHtmlTemplate,
+  ROOT_ELEMENT_ID,
+  SSR_TOKEN,
+} from '../../shared/build';
+import { Body, Head } from '../../shared/app';
 
 const ssrScript = `<script>window.${SSR_TOKEN}=true;</script>`;
 
 const streamedPromise = (output: Writable) => (
-    stream: NodeJS.ReadableStream,
+  stream: NodeJS.ReadableStream,
 ) =>
-    new Promise((resolve, reject) => {
-        stream.pipe(output, { end: false });
-        stream.once("end", resolve);
-        stream.once("error", reject);
-    });
+  new Promise((resolve, reject) => {
+    stream.pipe(output, { end: false });
+    stream.once('end', resolve);
+    stream.once('error', reject);
+  });
 
 /**
  * Renders the React app in a node (server) environment.
@@ -38,49 +38,49 @@ const streamedPromise = (output: Writable) => (
  * written to `output`.
  */
 export async function render(
-    output: Writable,
-    location: string,
-    chunkStats: Record<string, unknown>,
-    enableClientSideRendering: boolean,
+  output: Writable,
+  location: string,
+  chunkStats: Record<string, unknown>,
+  enableClientSideRendering: boolean,
 ) {
-    output.write(indexHtmlTemplate.start);
+  output.write(indexHtmlTemplate.start);
 
-    const renderToStream = enableClientSideRendering
-        ? renderToNodeStream
-        : renderToStaticNodeStream;
+  const renderToStream = enableClientSideRendering
+    ? renderToNodeStream
+    : renderToStaticNodeStream;
 
-    const headStream = renderToStream(
-        <StaticRouter location={location}>
-            <Head />
-        </StaticRouter>,
-    );
+  const headStream = renderToStream(
+    <StaticRouter location={location}>
+      <Head />
+    </StaticRouter>,
+  );
 
-    const stream = streamedPromise(output);
-    await stream(headStream);
+  const stream = streamedPromise(output);
+  await stream(headStream);
 
-    output.write(indexHtmlTemplate.endHeadStartBody);
+  output.write(indexHtmlTemplate.endHeadStartBody);
 
-    const sheet = new ServerStyleSheet();
-    const extractor = new ChunkExtractor({ stats: chunkStats });
-    const jsxRaw = (
-        <div id={ROOT_ELEMENT_ID}>
-            <StaticRouter location={location}>
-                <Body />
-            </StaticRouter>
-        </div>
-    );
-    const jsx = extractor.collectChunks(sheet.collectStyles(jsxRaw));
-    // TODO: renderToStaticNodeStream for static renders
-    const bodyStream = sheet.interleaveWithNodeStream(renderToStream(jsx));
-    await stream(bodyStream);
+  const sheet = new ServerStyleSheet();
+  const extractor = new ChunkExtractor({ stats: chunkStats });
+  const jsxRaw = (
+    <div id={ROOT_ELEMENT_ID}>
+      <StaticRouter location={location}>
+        <Body />
+      </StaticRouter>
+    </div>
+  );
+  const jsx = extractor.collectChunks(sheet.collectStyles(jsxRaw));
+  // TODO: renderToStaticNodeStream for static renders
+  const bodyStream = sheet.interleaveWithNodeStream(renderToStream(jsx));
+  await stream(bodyStream);
 
-    output.write(extractor.getStyleTags());
+  output.write(extractor.getStyleTags());
 
-    /* istanbul ignore if: once again, chunks are never found during tests */
-    if (enableClientSideRendering) {
-        output.write(ssrScript);
-        output.write(extractor.getScriptTags());
-    }
+  /* istanbul ignore if: once again, chunks are never found during tests */
+  if (enableClientSideRendering) {
+    output.write(ssrScript);
+    output.write(extractor.getScriptTags());
+  }
 
-    output.end(indexHtmlTemplate.end);
+  output.end(indexHtmlTemplate.end);
 }

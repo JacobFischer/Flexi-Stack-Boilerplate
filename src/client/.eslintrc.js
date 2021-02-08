@@ -9,8 +9,8 @@ const browserTsconfigPath = resolve(join(__dirname, "tsconfig.eslint.json"));
 
 /** @type {typeof import("../../.eslintrc.js")} */
 const clientEslintConfig = {
-    extends: ["jacobfischer/browser", "../../.eslintrc.js"],
-    /*
+  extends: ['jacobfischer/browser', '../../.eslintrc.js'],
+  /*
     parserOptions: {
         project: browserTsconfigPath,
     },

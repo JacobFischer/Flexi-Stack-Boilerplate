@@ -1,4 +1,4 @@
-import { IRouter, Router } from "express";
+import { IRouter, Router } from 'express';
 
 /**
  * The options used to startup the server.
@@ -8,17 +8,17 @@ import { IRouter, Router } from "express";
  * If true the client dist must already be built.
  */
 export interface ServerSetupOptions {
-    port: number;
-    enableClientSideRendering: boolean;
+  port: number;
+  enableClientSideRendering: boolean;
 }
 
 export type RouteExport =
-    | IRouter
-    | { route: string; handlers: RouteExport[] }
-    | ((options: ServerSetupOptions) => RouteExport)
-    | ((options: ServerSetupOptions) => Promise<RouteExport>);
+  | IRouter
+  | { route: string; handlers: RouteExport[] }
+  | ((options: ServerSetupOptions) => RouteExport)
+  | ((options: ServerSetupOptions) => Promise<RouteExport>);
 
-const isRouter = (thing: RouteExport): thing is IRouter => "use" in thing;
+const isRouter = (thing: RouteExport): thing is IRouter => 'use' in thing;
 
 /**
  * Sets up route handlers via some options.
@@ -28,20 +28,20 @@ const isRouter = (thing: RouteExport): thing is IRouter => "use" in thing;
  * @param route - The route export(s) to handle.
  */
 export async function setupRoutes(
-    app: IRouter,
-    options: ServerSetupOptions,
-    route: RouteExport,
+  app: IRouter,
+  options: ServerSetupOptions,
+  route: RouteExport,
 ): Promise<void> {
-    if (isRouter(route)) {
-        app.use(route);
-    } else if (typeof route === "object") {
-        const subRouter = Router();
-        app.use(route.route, subRouter);
+  if (isRouter(route)) {
+    app.use(route);
+  } else if (typeof route === 'object') {
+    const subRouter = Router();
+    app.use(route.route, subRouter);
 
-        for (const handler of route.handlers) {
-            await setupRoutes(subRouter, options, handler);
-        }
-    } else {
-        await setupRoutes(app, options, await route(options));
+    for (const handler of route.handlers) {
+      await setupRoutes(subRouter, options, handler);
     }
+  } else {
+    await setupRoutes(app, options, await route(options));
+  }
 }

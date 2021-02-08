@@ -1,8 +1,8 @@
-import { Server } from "http";
+import { Server } from 'http';
 // import cors from "cors";
-import express from "express";
-import routes from "./routes";
-import { setupRoutes } from "./utils/setup-routes";
+import express from 'express';
+import routes from './routes';
+import { setupRoutes } from './utils/setup-routes';
 
 /**
  * The options used to startup the server.
@@ -12,8 +12,8 @@ import { setupRoutes } from "./utils/setup-routes";
  * If true the client dist must already be built.
  */
 export interface ServerSetupOptions {
-    port: number;
-    enableClientSideRendering: boolean;
+  port: number;
+  enableClientSideRendering: boolean;
 }
 
 /**
@@ -24,12 +24,12 @@ export interface ServerSetupOptions {
  * resolving to that node server.
  */
 export async function start(options: ServerSetupOptions): Promise<Server> {
-    const app = express();
-    // app.use(cors);
+  const app = express();
+  // app.use(cors);
 
-    await setupRoutes(app, options, routes);
+  await setupRoutes(app, options, routes);
 
-    return new Promise<Server>((res) => {
-        const server = app.listen(options.port, () => res(server));
-    });
+  return new Promise<Server>((res) => {
+    const server = app.listen(options.port, () => res(server));
+  });
 }

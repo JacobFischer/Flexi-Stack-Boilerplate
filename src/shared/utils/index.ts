@@ -1,5 +1,5 @@
-import { TypeOfTag } from "typescript";
-import { TypeOfType } from "./types";
+import { TypeOfTag } from 'typescript';
+import { TypeOfType } from './types';
 
 /**
  * Tests if a given value is an Object (and not null), as a type-safe way to
@@ -9,7 +9,7 @@ import { TypeOfType } from "./types";
  * @returns - True if actually an object, false otherwise.
  */
 export function isObject<T>(obj: T): obj is T & Record<PropertyKey, unknown> {
-    return typeof obj === "object" && obj !== null;
+  return typeof obj === 'object' && obj !== null;
 }
 
 /**
@@ -22,22 +22,22 @@ export function isObject<T>(obj: T): obj is T & Record<PropertyKey, unknown> {
  * @returns True if the key is present of the expected type, false otherwise.
  */
 export function isKeyIn<
-    TObj extends {}, // eslint-disable-line @typescript-eslint/ban-types
-    TKey extends PropertyKey,
-    // TODO: flesh out via typeof or grab
-    TKeyType extends undefined | TypeOfTag = undefined
+  TObj extends {}, // eslint-disable-line @typescript-eslint/ban-types
+  TKey extends PropertyKey,
+  // TODO: flesh out via typeof or grab
+  TKeyType extends undefined | TypeOfTag = undefined
 >(
-    obj: TObj,
-    key: TKey,
-    keyType?: TKeyType,
+  obj: TObj,
+  key: TKey,
+  keyType?: TKeyType,
 ): obj is TObj &
-    Record<TKey, TKeyType extends string ? TypeOfType<TKeyType> : unknown> {
-    const exists = key in obj;
+  Record<TKey, TKeyType extends string ? TypeOfType<TKeyType> : unknown> {
+  const exists = key in obj;
 
-    if (!keyType || !exists) {
-        return exists;
-    }
+  if (!keyType || !exists) {
+    return exists;
+  }
 
-    const record = (obj as unknown) as Record<TKey, unknown>;
-    return typeof record[key] === keyType;
+  const record = (obj as unknown) as Record<TKey, unknown>;
+  return typeof record[key] === keyType;
 }

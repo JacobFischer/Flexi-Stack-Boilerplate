@@ -1,6 +1,6 @@
-import { resolve, join } from "path";
+import { resolve, join } from 'path';
 
-const root = resolve("./");
+const root = resolve('./');
 
 /**
  * Resolves some path(s) to the root directory.

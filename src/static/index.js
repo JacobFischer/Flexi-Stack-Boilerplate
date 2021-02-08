@@ -4,16 +4,16 @@
 // will not open our babel.config.js file. So this side steps it by
 // using @babel/register directly.
 
-const { resolve } = require("path");
+const { resolve } = require('path');
 
 // eslint-disable-next-line no-console
-console.log("-- Static build --");
+console.log('-- Static build --');
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-require("@babel/register")({
-    extensions: [".ts", ".tsx"],
-    ignore: [],
-    configFile: resolve(__dirname, "./babel.config.js"),
+require('@babel/register')({
+  extensions: ['.ts', '.tsx'],
+  ignore: [],
+  configFile: resolve(__dirname, './babel.config.js'),
 });
 
-require("./start.ts");
+require('./start.ts');
