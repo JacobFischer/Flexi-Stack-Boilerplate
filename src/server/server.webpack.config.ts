@@ -2,11 +2,12 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
-import { DIST_PATH_SERVER, createWebpackConfiguration } from '../shared/build';
+import {
+  DIST_PATH_SERVER,
+  createWebpackConfiguration,
+  inAbsRootDir,
+} from '../shared/build';
 import babelConfig from './babel.config';
-
-const distRoot = (...paths: string[]) =>
-  resolve(__dirname, '../../', ...paths);
 
 export default createWebpackConfiguration(babelConfig, {
   entry: [resolve(__dirname, './entry.tsx')],
@@ -14,7 +15,7 @@ export default createWebpackConfiguration(babelConfig, {
   externals: [nodeExternals()],
   output: {
     filename: '[name].js',
-    path: distRoot(DIST_PATH_SERVER),
+    path: inAbsRootDir(DIST_PATH_SERVER),
   },
   target: 'node',
   plugins: [

@@ -8,16 +8,20 @@ import TerserJSPlugin from 'terser-webpack-plugin';
 import { WebpackPluginInstance } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import {
+  BUNDLE_DIR,
+  DIST_PATH_CLIENT,
+  DIST_DIR,
   LOADABLE_COMPONENTS_STATS_FILENAME,
   ROOT_ELEMENT_ID,
-  STATIC_BUNDLE_DIR,
+  WEBPACK_BUNDLE_REPORT_FILENAME,
   createWebpackConfiguration,
+  inAbsRootDir,
   indexHtmlTemplate,
 } from '../shared/build';
 import { isObject, isKeyIn } from '../shared/utils';
 import babelConfig from './babel.config';
 
-const inStaticDir = (...dirs: string[]) => urlJoin(STATIC_BUNDLE_DIR, ...dirs);
+const inBundleDir = (...dirs: string[]) => urlJoin(BUNDLE_DIR, ...dirs);
 
 /**
  * LoadablePlugin's types are broken.
@@ -43,19 +47,11 @@ Invalid to use in Webpack`);
 };
 
 export default createWebpackConfiguration(babelConfig, {
-  entry: ['css-reset-and-normalize', resolve(__dirname, './entry.tsx')],
+  entry: resolve(__dirname, './entry.tsx'),
   output: {
-    filename: inStaticDir('[name].js'),
-    path: resolve(__dirname, '../../dist/client'),
+    filename: inBundleDir('[name].js'),
+    path: inAbsRootDir(DIST_PATH_CLIENT),
     publicPath: '', // TODO: get "auto" to work as per Webpack v5
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader'],
-      },
-    ],
   },
   resolve: {
     fallback: {
@@ -64,8 +60,8 @@ export default createWebpackConfiguration(babelConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: inStaticDir('[name].css'),
-      chunkFilename: inStaticDir('[id].css'),
+      filename: inBundleDir('[name].css'),
+      chunkFilename: inBundleDir('[id].css'),
     }),
     newLoadablePlugin({
       filename: LOADABLE_COMPONENTS_STATS_FILENAME,
@@ -81,10 +77,7 @@ export default createWebpackConfiguration(babelConfig, {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
-      reportFilename: resolve(
-        __dirname,
-        '../../dist/webpack-bundle-report.html',
-      ),
+      reportFilename: inAbsRootDir(DIST_DIR, WEBPACK_BUNDLE_REPORT_FILENAME),
     }),
   ],
   optimization: {

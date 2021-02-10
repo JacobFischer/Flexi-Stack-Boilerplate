@@ -1,15 +1,7 @@
-import { css } from 'styled-components';
+import urlJoin from 'url-join';
+import { BUNDLE_DIR, GLOBALS_CSS_FILENAME } from './constants';
 
-const globalStyle = css({
-  body: {
-    backgroundColor: 'lightgrey',
-    fontSize: '16px',
-    padding: '1rem',
-  },
-});
-
-const globalStyleString = globalStyle.join('');
-
+const globalCssPath = urlJoin(BUNDLE_DIR, GLOBALS_CSS_FILENAME);
 const unIndent = (str: string) => str.replace(/ {4}|\n|\t/g, '');
 
 /**
@@ -22,9 +14,9 @@ export const indexHtmlTemplate = Object.freeze({
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/${globalCssPath}" media="all">
 `),
   endHeadStartBody: unIndent(`
-        <style>${globalStyleString}</style>
     </head>
     <body>`),
   end: unIndent(`

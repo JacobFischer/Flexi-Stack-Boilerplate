@@ -1,10 +1,11 @@
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { emptyDir, ensureDir, readdir, remove, stat } from 'fs-extra';
 import { pagesList } from '../../src/shared/pages';
 import { buildStaticPages } from '../../src/static/build';
+import { inAbsRootDir } from '../../src/shared/build';
 
-const TEMP_DIR = resolve(__dirname, '../../temp/');
-const OUTPUT_DIR = join(TEMP_DIR, 'static/');
+const TEMP_DIR = inAbsRootDir('temp/');
+const OUTPUT_DIR = join(TEMP_DIR, 'output/');
 
 beforeAll(() => ensureDir(OUTPUT_DIR));
 afterEach(() => emptyDir(OUTPUT_DIR));

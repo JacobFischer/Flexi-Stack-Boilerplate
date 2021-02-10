@@ -49,12 +49,11 @@ export async function render(
     ? renderToNodeStream
     : renderToStaticNodeStream;
 
-  const headStream = renderToStream(
-    <StaticRouter location={location}>
-      <Head />
-    </StaticRouter>,
+  const jsxElementFrom = (element: JSX.Element) => (
+    <StaticRouter location={location}>{element}</StaticRouter>
   );
 
+  const headStream = renderToStream(jsxElementFrom(<Head />));
   const stream = streamedPromise(output);
   await stream(headStream);
 
@@ -62,14 +61,13 @@ export async function render(
 
   const sheet = new ServerStyleSheet();
   const extractor = new ChunkExtractor({ stats: chunkStats });
-  const jsxRaw = (
+  const jsxBody = jsxElementFrom(
     <div id={ROOT_ELEMENT_ID}>
-      <StaticRouter location={location}>
-        <Body />
-      </StaticRouter>
-    </div>
+      <Body />
+    </div>,
   );
-  const jsx = extractor.collectChunks(sheet.collectStyles(jsxRaw));
+
+  const jsx = extractor.collectChunks(sheet.collectStyles(jsxBody));
   // TODO: renderToStaticNodeStream for static renders
   const bodyStream = sheet.interleaveWithNodeStream(renderToStream(jsx));
   await stream(bodyStream);
