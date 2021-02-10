@@ -23,18 +23,18 @@ exports[`all pages page '404 Not Found' renders as an App page 1`] = `
 
 exports[`all pages page 'About' renders 1`] = `
 <div
-  className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+  className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
 >
   <h1
-    className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+    className="Header__DarkBlue-zt7fth-0 eCcsLu"
   >
     About
   </h1>
   <ul
-    className="NavBar__List-sc-10ckilk-0 bUmSUd"
+    className="NavBar__List-pvivyq-0 JFDnC"
   >
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/"
@@ -44,7 +44,7 @@ exports[`all pages page 'About' renders 1`] = `
       </a>
     </li>
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/about"
@@ -54,7 +54,7 @@ exports[`all pages page 'About' renders 1`] = `
       </a>
     </li>
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/nowhere"
@@ -81,18 +81,18 @@ exports[`all pages page 'About' renders as an App page 1`] = `
   </head>
   <body>
     <div
-      className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+      className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
     >
       <h1
-        className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+        className="Header__DarkBlue-zt7fth-0 eCcsLu"
       >
         About
       </h1>
       <ul
-        className="NavBar__List-sc-10ckilk-0 bUmSUd"
+        className="NavBar__List-pvivyq-0 JFDnC"
       >
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/"
@@ -102,7 +102,7 @@ exports[`all pages page 'About' renders as an App page 1`] = `
           </a>
         </li>
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/about"
@@ -112,7 +112,7 @@ exports[`all pages page 'About' renders as an App page 1`] = `
           </a>
         </li>
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/nowhere"
@@ -134,18 +134,18 @@ exports[`all pages page 'About' renders as an App page 1`] = `
 
 exports[`all pages page 'Home Page' renders 1`] = `
 <div
-  className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+  className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
 >
   <h1
-    className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+    className="Header__DarkBlue-zt7fth-0 eCcsLu"
   >
     Home Page
   </h1>
   <ul
-    className="NavBar__List-sc-10ckilk-0 bUmSUd"
+    className="NavBar__List-pvivyq-0 JFDnC"
   >
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/"
@@ -155,7 +155,7 @@ exports[`all pages page 'Home Page' renders 1`] = `
       </a>
     </li>
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/about"
@@ -165,7 +165,7 @@ exports[`all pages page 'Home Page' renders 1`] = `
       </a>
     </li>
     <li
-      className="NavBar__Item-sc-10ckilk-1 dCnps"
+      className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
         href="/nowhere"
@@ -192,18 +192,18 @@ exports[`all pages page 'Home Page' renders as an App page 1`] = `
   </head>
   <body>
     <div
-      className="PageWrapper__Wrapper-sc-1l9kcuf-0 iodFgP"
+      className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
     >
       <h1
-        className="Header__DarkBlue-qqbwj7-0 cdiAUB"
+        className="Header__DarkBlue-zt7fth-0 eCcsLu"
       >
         Home Page
       </h1>
       <ul
-        className="NavBar__List-sc-10ckilk-0 bUmSUd"
+        className="NavBar__List-pvivyq-0 JFDnC"
       >
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/"
@@ -213,7 +213,7 @@ exports[`all pages page 'Home Page' renders as an App page 1`] = `
           </a>
         </li>
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/about"
@@ -223,7 +223,7 @@ exports[`all pages page 'Home Page' renders as an App page 1`] = `
           </a>
         </li>
         <li
-          className="NavBar__Item-sc-10ckilk-1 dCnps"
+          className="NavBar__Item-pvivyq-1 dvvGHr"
         >
           <a
             href="/nowhere"
