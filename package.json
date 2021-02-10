@@ -114,7 +114,7 @@
     "start:client": "http-server ./dist/client",
     "start:server": "node ./dist/server/main.js",
     "start:static": "http-server ./dist/static",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:all",
     "build:all": "npm run build:client && npm run build:server && npm run build:static",
     "build:clean": "npm run clean && npm run build",
     "build:webpack": "cross-env TS_NODE_PROJECT=\"tsconfig.node.json\" NODE_ENV=\"development\" webpack --progress --mode development",
