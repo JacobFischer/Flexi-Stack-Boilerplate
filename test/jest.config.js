@@ -1,6 +1,17 @@
 // @ts-check
 
 const { resolve } = require('path');
+const { accessSync } = require('fs');
+
+try {
+  accessSync(resolve(__dirname, '../dist'));
+} catch (err) {
+  throw new Error(`Jest config error
+---
+Cannot run Jest without dist built!
+please run 'npm run build' first
+---`);
+}
 
 /** @type {Partial<import("@jest/types/build/Config").InitialOptions>} */
 const jestConfig = {
