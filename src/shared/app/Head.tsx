@@ -3,6 +3,7 @@ import React from 'react';
 import { Routes } from './routes';
 import { useLocation, StaticRouter } from 'react-router-dom';
 import { renderToStaticMarkup } from 'react-dom/server';
+import globalsCss from './globals.css';
 
 export const Head: React.FunctionComponent<{
   // TODO: this is kind of hack-y. react-helmet MUST have head children as
@@ -21,6 +22,7 @@ export const Head: React.FunctionComponent<{
 
   return (
     <Wrapper>
+      <link rel="stylesheet" type="text/css" href={globalsCss} media="all" />
       <title>{title}</title>
     </Wrapper>
   );

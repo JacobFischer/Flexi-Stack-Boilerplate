@@ -3,8 +3,11 @@
 const { resolve } = require('path');
 const { accessSync } = require('fs');
 
+const pathTo = (/** @type {string[]} */ ...paths) =>
+  resolve(__dirname, ...paths);
+
 try {
-  accessSync(resolve(__dirname, '../dist'));
+  accessSync(pathTo('../../dist'));
 } catch (err) {
   throw new Error(`Jest config error
 ---
@@ -21,10 +24,10 @@ const jestConfig = {
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
     '\\\\node_modules\\\\', // do not test external modules
-    '(babel|webpack|jest).config.(js|ts)', // config files for frameworks/tools
+    '(babel|webpack|jest).config.(j|t)s', // config files for frameworks/tools
     '.eslintrc.js', // config file for eslint
     // files for client/server entry-points. In truth they are tested, but these files are really primarily an entry for webpack running
-    'src/(server|static)/(entry|index).(j|t)s(x?)',
+    'src/(server|static)/(entry).(j|t)s(x?)',
     'src/client/', // client specific files are tested, but webpack bundled. Thus not coverage testable
   ],
   coverageReporters: ['text'],
@@ -38,23 +41,21 @@ const jestConfig = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   preset: 'ts-jest',
-  rootDir: resolve('./'),
-  setupFiles: [resolve(__dirname, './setup.ts')],
+  rootDir: pathTo('../../'),
+  setupFiles: [pathTo('./setup.ts')],
   testEnvironment: 'node',
   testPathIgnorePatterns: [
-    '/lib/',
     '/node_modules/',
-    '/test/utils',
+    '/test/(jest|utils)', // TODO: should really be tested...
     '([^s]+).config.(js|ts|tsx)',
     '.eslintrc.js(on)?',
-    '/test/(setup|babel-transformer).(t|j)sx?',
   ],
   testRegex: ['(/test/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$'],
   testTimeout: 15_000,
   transform: {
-    '^.+\\.[t|j]sx?$': resolve(__dirname, './babel-transformer.js'),
+    '^.+\\.[t|j]sx?$': pathTo('./transformers/babel.js'),
+    '\\.(css|jpg|jpeg|png|gif|svg)$': pathTo('./transformers/asset.js'),
   },
-
   verbose: true,
 };
 

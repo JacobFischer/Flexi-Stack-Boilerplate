@@ -1,9 +1,9 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "target": "es2018",
-        "module": "esnext",
-        "lib": ["esnext"],
-        "jsx": "react",
-    }
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "jsx": "react",
+  }
 }

@@ -6,6 +6,9 @@
  * rendered
  */
 
+/* Css reset */
+@import 'css-reset-and-normalize';
+
 body {
     background-color: lightgrey;
     font-size: 16px;

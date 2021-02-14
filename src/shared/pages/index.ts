@@ -12,3 +12,5 @@ export type PageExport = {
 export const pagesList: PageExport[] = Object.values(allPages).sort((a, b) =>
   a.route.localeCompare(b.route),
 );
+
+export const pagesAnd404List = [...pagesList, pageNotFound];

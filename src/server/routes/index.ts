@@ -1,10 +1,12 @@
-import staticRoute from './static';
+import assets from './assets';
+import bundle from './bundle';
 import serverSideRender from './server-side-render';
 
 export default {
   route: '/',
   handlers: [
-    staticRoute, // try to handle as a static asset first, if not
-    serverSideRender, // then do a server side render
+    assets,
+    bundle, // try to handle as a static assets and bundles first
+    serverSideRender, // if not then do a server side render
   ],
 };

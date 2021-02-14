@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const babelJest = require('babel-jest');
 
 module.exports = babelJest.createTransformer({
-  extends: resolve(__dirname, '../src/shared/build/babel.config.js'),
+  extends: resolve(__dirname, '../../../src/shared/build/babel.config.js'),
   plugins: ['@babel/plugin-transform-typescript'],
   presets: [
     [

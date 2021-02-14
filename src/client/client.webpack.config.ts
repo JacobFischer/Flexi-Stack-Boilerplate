@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import urlJoin from 'url-join';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserJSPlugin from 'terser-webpack-plugin';
 import { WebpackPluginInstance } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -20,8 +19,6 @@ import {
 } from '../shared/build';
 import { isObject, isKeyIn } from '../shared/utils';
 import babelConfig from './babel.config';
-
-const inBundleDir = (...dirs: string[]) => urlJoin(BUNDLE_DIR, ...dirs);
 
 /**
  * LoadablePlugin's types are broken.
@@ -49,9 +46,8 @@ Invalid to use in Webpack`);
 export default createWebpackConfiguration(babelConfig, {
   entry: resolve(__dirname, './entry.tsx'),
   output: {
-    filename: inBundleDir('[name].js'),
+    filename: urlJoin(BUNDLE_DIR, '[name]-[chunkhash].js'),
     path: inAbsRootDir(DIST_PATH_CLIENT),
-    publicPath: '', // TODO: get "auto" to work as per Webpack v5
   },
   resolve: {
     fallback: {
@@ -59,10 +55,6 @@ export default createWebpackConfiguration(babelConfig, {
     },
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: inBundleDir('[name].css'),
-      chunkFilename: inBundleDir('[id].css'),
-    }),
     newLoadablePlugin({
       filename: LOADABLE_COMPONENTS_STATS_FILENAME,
     }),

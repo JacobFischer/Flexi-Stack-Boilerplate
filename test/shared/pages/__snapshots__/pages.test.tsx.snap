@@ -1,33 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`all pages page '404 Not Found' renders 1`] = `
+exports[`all pages page '404 Not Found' should match the last snapshot 1`] = `
 <div>
   404 Not Found
 </div>
 `;
 
-exports[`all pages page '404 Not Found' renders as an App page 1`] = `
-<html>
-  <head>
-    <title>
-      404 Not Found
-    </title>
-  </head>
-  <body>
-    <div>
-      404 Not Found
-    </div>
-  </body>
-</html>
-`;
-
-exports[`all pages page 'About' renders 1`] = `
+exports[`all pages page 'About' should match the last snapshot 1`] = `
 <div
-  className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
+  className="PageWrapper__Wrapper-bwihxq-0 jedrlc"
 >
   <h1
     className="Header__DarkBlue-zt7fth-0 eCcsLu"
   >
+    <img
+      className="PageWrapper__Logo-bwihxq-1 hoiyYK"
+      src="mocked://src/shared/components/PageWrapper/logo-f0756fa86850a0f3bc772d7ba8dd6aa7.svg"
+    />
     About
   </h1>
   <ul
@@ -65,80 +54,31 @@ exports[`all pages page 'About' renders 1`] = `
     </li>
   </ul>
   <section>
-    <div>
-      About my boy
-    </div>
+    <p>
+      This is an about section. This is just the boilerplate code, so here's a cute pug.
+    </p>
+    <img
+      src="mocked://src/shared/pages/about/pug-fcb5dcd13f1ad6e6efe6fcd6c49f2d15.jpg"
+      width={800}
+    />
+    <p>
+      Feel free to replace with whatever you desire.
+    </p>
   </section>
 </div>
 `;
 
-exports[`all pages page 'About' renders as an App page 1`] = `
-<html>
-  <head>
-    <title>
-      About
-    </title>
-  </head>
-  <body>
-    <div
-      className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
-    >
-      <h1
-        className="Header__DarkBlue-zt7fth-0 eCcsLu"
-      >
-        About
-      </h1>
-      <ul
-        className="NavBar__List-pvivyq-0 JFDnC"
-      >
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/about"
-            onClick={[Function]}
-          >
-            About
-          </a>
-        </li>
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/nowhere"
-            onClick={[Function]}
-          >
-            Nowhere
-          </a>
-        </li>
-      </ul>
-      <section>
-        <div>
-          About my boy
-        </div>
-      </section>
-    </div>
-  </body>
-</html>
-`;
-
-exports[`all pages page 'Home Page' renders 1`] = `
+exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
 <div
-  className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
+  className="PageWrapper__Wrapper-bwihxq-0 jedrlc"
 >
   <h1
     className="Header__DarkBlue-zt7fth-0 eCcsLu"
   >
+    <img
+      className="PageWrapper__Logo-bwihxq-1 hoiyYK"
+      src="mocked://src/shared/components/PageWrapper/logo-f0756fa86850a0f3bc772d7ba8dd6aa7.svg"
+    />
     Home Page
   </h1>
   <ul
@@ -181,64 +121,4 @@ exports[`all pages page 'Home Page' renders 1`] = `
     </div>
   </section>
 </div>
-`;
-
-exports[`all pages page 'Home Page' renders as an App page 1`] = `
-<html>
-  <head>
-    <title>
-      Home Page
-    </title>
-  </head>
-  <body>
-    <div
-      className="PageWrapper__Wrapper-sc-120esh3-0 dqljDC"
-    >
-      <h1
-        className="Header__DarkBlue-zt7fth-0 eCcsLu"
-      >
-        Home Page
-      </h1>
-      <ul
-        className="NavBar__List-pvivyq-0 JFDnC"
-      >
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/about"
-            onClick={[Function]}
-          >
-            About
-          </a>
-        </li>
-        <li
-          className="NavBar__Item-pvivyq-1 dvvGHr"
-        >
-          <a
-            href="/nowhere"
-            onClick={[Function]}
-          >
-            Nowhere
-          </a>
-        </li>
-      </ul>
-      <section>
-        <div>
-          Hello world from the app!
-        </div>
-      </section>
-    </div>
-  </body>
-</html>
 `;

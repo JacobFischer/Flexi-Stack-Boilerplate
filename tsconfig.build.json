@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    // needed, or the nested build configs will miss these files outside their
+    // directories, for example in shared.
+    "src/**/*.d.ts"
+  ]
+}

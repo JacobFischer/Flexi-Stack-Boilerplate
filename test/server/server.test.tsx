@@ -89,6 +89,8 @@ describe('Server', () =>
           // chop off the end, because scripts may exist
           const renderedHtml = chunks
             .join('')
+            // React will render self closing tags, e.g. <img /> with the close tag. Webkit will omit the /, so we need to strip them.
+            .replace(/\/>/g, '>')
             // special case, webkit won't allow tagless
             .replace(/async/g, `async=""`);
 

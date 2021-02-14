@@ -1,7 +1,6 @@
 import { join } from 'path';
-import { createWriteStream, ensureDir, readdir, copyFile } from 'fs-extra';
+import { createWriteStream, ensureDir } from 'fs-extra';
 import { getChunkStats, render } from '../server/utils/';
-import { DIST_PATH_CLIENT, BUNDLE_DIR } from '../shared/build';
 import { pagesList } from '../shared/pages';
 
 const silentLog: (...strings: string[]) => void = () => undefined;
@@ -21,8 +20,8 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
 
   const chunkStats = await getChunkStats();
 
-  await Promise.all([
-    ...routesAnd404.map(async (route) => {
+  await Promise.all(
+    routesAnd404.map(async (route) => {
       let pathDir = rootDir(route);
       let filename = 'index.html';
       if (route === '/404') {
@@ -39,27 +38,5 @@ export async function buildStaticPages(outputPath: string, log = silentLog) {
 
       log(`  -> Route '${route}' saved to static file '${pathFile}'`);
     }),
-    (async () => {
-      const clientBundlePath = join(DIST_PATH_CLIENT, BUNDLE_DIR);
-      const outputBundlePath = join(outputPath, BUNDLE_DIR);
-
-      await ensureDir(outputBundlePath);
-
-      const staticFilenames = await readdir(clientBundlePath);
-      const cssFileNames = staticFilenames.filter((filename) =>
-        filename.endsWith('.css'),
-      );
-
-      await Promise.all(
-        cssFileNames.map((filename) =>
-          copyFile(
-            join(clientBundlePath, filename),
-            join(outputBundlePath, filename),
-          ),
-        ),
-      );
-
-      log(`  -> Static css files copied to '${outputBundlePath}'`);
-    })(),
-  ]);
+  );
 }

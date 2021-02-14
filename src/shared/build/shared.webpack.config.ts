@@ -1,15 +1,21 @@
 /* eslint-env node */
 import { TransformOptions } from '@babel/core';
+import urlJoin from 'url-join';
 import { Configuration } from 'webpack';
 import webpackMerge from 'webpack-merge';
+import { ASSETS_DIR } from './constants';
 
 export const createWebpackConfiguration = (
   babelConfig: TransformOptions,
   ...configs: Configuration[]
-) => (env: undefined, argv: Configuration): Configuration =>
+) => (env: unknown, argv: Configuration): Configuration =>
   webpackMerge(
     {
       devtool: argv.mode === 'development' ? 'eval-cheap-source-map' : false,
+      entry: [],
+      experiments: {
+        asset: true,
+      },
       module: {
         rules: [
           {
@@ -25,10 +31,32 @@ export const createWebpackConfiguration = (
               },
             ],
           },
+          {
+            test: /\.(jpe?g|png|gif|ico|svg)$/i,
+            type: 'asset',
+          },
+          {
+            test: /\.css/i,
+            type: 'asset/resource',
+            use: [
+              {
+                loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    plugins: [
+                      'postcss-import',
+                      argv.mode === 'development' ? undefined : 'cssnano',
+                    ],
+                  },
+                },
+              },
+            ],
+          },
         ],
       },
       output: {
-        sourceMapFilename: '[name].js.map',
+        assetModuleFilename: urlJoin(ASSETS_DIR, '[name]-[hash][ext]'),
+        publicPath: '/',
       },
       optimization: {
         sideEffects: true,
