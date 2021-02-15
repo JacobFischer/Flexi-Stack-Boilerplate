@@ -15,7 +15,6 @@ import babelConfig from './babel.config';
  */
 class OmitAssetsPlugin {
   apply(compiler: webpack.Compiler) {
-    // Specify the event hook to attach to
     compiler.hooks.make.tap('OmitAssetsPlugin', (compilation) => {
       compilation.hooks.processAssets.tap('OmitAssetsPlugin', (assets) => {
         for (const key of Object.keys(assets)) {

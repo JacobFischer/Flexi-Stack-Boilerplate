@@ -8,10 +8,12 @@ import { ASSETS_DIR } from './constants';
 export const createWebpackConfiguration = (
   babelConfig: TransformOptions,
   ...configs: Configuration[]
-) => (env: unknown, argv: Configuration): Configuration =>
-  webpackMerge(
+) => (env: unknown, argv: Configuration): Configuration => {
+  const isDev = argv.mode === 'development';
+
+  return webpackMerge(
     {
-      devtool: argv.mode === 'development' ? 'eval-cheap-source-map' : false,
+      devtool: isDev ? 'eval-cheap-source-map' : false,
       entry: [],
       experiments: {
         asset: true,
@@ -34,6 +36,7 @@ export const createWebpackConfiguration = (
           {
             test: /\.(jpe?g|png|gif|ico|svg)$/i,
             type: 'asset',
+            use: isDev ? undefined : ['image-webpack-loader'],
           },
           {
             test: /\.css/i,
@@ -43,10 +46,7 @@ export const createWebpackConfiguration = (
                 loader: 'postcss-loader',
                 options: {
                   postcssOptions: {
-                    plugins: [
-                      'postcss-import',
-                      argv.mode === 'development' ? undefined : 'cssnano',
-                    ],
+                    plugins: ['postcss-import', isDev ? undefined : 'cssnano'],
                   },
                 },
               },
@@ -66,12 +66,10 @@ export const createWebpackConfiguration = (
         usedExports: true,
       },
       resolve: {
-        alias:
-          argv.mode === 'development'
-            ? { 'react-dom': '@hot-loader/react-dom' }
-            : {},
+        alias: isDev ? { 'react-dom': '@hot-loader/react-dom' } : {},
         extensions: ['.tsx', '.ts', '.js'],
       },
     },
     ...configs,
   );
+};
