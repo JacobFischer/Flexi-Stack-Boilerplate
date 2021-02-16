@@ -8,7 +8,7 @@ void (async () => {
   program
     .version('0.0.1') // TODO: read from package.json with webpack happy
     .description('Starts the backend server.')
-    .option('-p, --port <port>', 'The port to bind to', 8080)
+    .option('-p, --port <port>', 'The port to bind to', '8080')
     .option('-c, --csr', 'Enable client side rendering')
     .parse(process.argv);
 

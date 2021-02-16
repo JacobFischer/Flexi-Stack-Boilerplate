@@ -1,7 +1,6 @@
 import { Server } from 'http';
 import { Writable } from 'stream';
 import puppeteer from 'puppeteer';
-import { Browser } from 'puppeteer/lib/cjs/puppeteer/common/Browser';
 import { getChunkStats, render } from '../../src/server/utils';
 import { start } from '../../src/server/start';
 import { matchingRoute } from '../../src/shared/app/routes';
@@ -37,7 +36,7 @@ describe('Server', () =>
 
       describe('with puppeteer', () => {
         // will be set first below
-        let browser = (undefined as unknown) as Browser;
+        let browser = (undefined as unknown) as puppeteer.Browser;
         beforeAll(async () => {
           browser = await puppeteer.launch();
         });
@@ -54,7 +53,7 @@ describe('Server', () =>
           const page = await browser.newPage();
           await page.goto(`http://localhost:${port}${location}`);
 
-          const evalSSR = await page.evaluate(`window.${SSR_TOKEN}`);
+          const evalSSR: unknown = await page.evaluate(`window.${SSR_TOKEN}`);
           expect(evalSSR).toStrictEqual(csr || undefined);
 
           await page.close();

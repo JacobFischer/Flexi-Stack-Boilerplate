@@ -14,7 +14,7 @@ exports[`all pages page 'About' should match the last snapshot 1`] = `
     className="Header__DarkBlue-zt7fth-0 DWFbH"
   >
     <img
-      className="PageWrapper__Logo-bwihxq-1 hoiyYK"
+      className="PageWrapper__Logo-bwihxq-1 kLoJdV"
       src="mocked://src/shared/components/PageWrapper/logo-f0756fa86850a0f3bc772d7ba8dd6aa7.svg"
     />
     About
@@ -79,7 +79,7 @@ exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
     className="Header__DarkBlue-zt7fth-0 DWFbH"
   >
     <img
-      className="PageWrapper__Logo-bwihxq-1 hoiyYK"
+      className="PageWrapper__Logo-bwihxq-1 kLoJdV"
       src="mocked://src/shared/components/PageWrapper/logo-f0756fa86850a0f3bc772d7ba8dd6aa7.svg"
     />
     Home Page
