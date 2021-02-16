@@ -11,7 +11,7 @@ exports[`all pages page 'About' should match the last snapshot 1`] = `
   className="PageWrapper__Wrapper-bwihxq-0 jedrlc"
 >
   <h1
-    className="Header__DarkBlue-zt7fth-0 eCcsLu"
+    className="Header__DarkBlue-zt7fth-0 DWFbH"
   >
     <img
       className="PageWrapper__Logo-bwihxq-1 hoiyYK"
@@ -20,12 +20,13 @@ exports[`all pages page 'About' should match the last snapshot 1`] = `
     About
   </h1>
   <ul
-    className="NavBar__List-pvivyq-0 JFDnC"
+    className="NavBar__List-pvivyq-0 hiudjJ"
   >
     <li
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/"
         onClick={[Function]}
       >
@@ -36,6 +37,7 @@ exports[`all pages page 'About' should match the last snapshot 1`] = `
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/about"
         onClick={[Function]}
       >
@@ -46,6 +48,7 @@ exports[`all pages page 'About' should match the last snapshot 1`] = `
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/nowhere"
         onClick={[Function]}
       >
@@ -73,7 +76,7 @@ exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
   className="PageWrapper__Wrapper-bwihxq-0 jedrlc"
 >
   <h1
-    className="Header__DarkBlue-zt7fth-0 eCcsLu"
+    className="Header__DarkBlue-zt7fth-0 DWFbH"
   >
     <img
       className="PageWrapper__Logo-bwihxq-1 hoiyYK"
@@ -82,12 +85,13 @@ exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
     Home Page
   </h1>
   <ul
-    className="NavBar__List-pvivyq-0 JFDnC"
+    className="NavBar__List-pvivyq-0 hiudjJ"
   >
     <li
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/"
         onClick={[Function]}
       >
@@ -98,6 +102,7 @@ exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/about"
         onClick={[Function]}
       >
@@ -108,6 +113,7 @@ exports[`all pages page 'Home Page' should match the last snapshot 1`] = `
       className="NavBar__Item-pvivyq-1 dvvGHr"
     >
       <a
+        className="NavBar__StyledLink-pvivyq-2 gSYMGG"
         href="/nowhere"
         onClick={[Function]}
       >

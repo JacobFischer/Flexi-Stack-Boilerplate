@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const DarkBlue = styled.h1({
-  color: 'darkblue',
+const DarkBlue = styled.h1((props) => ({
+  color: props.theme.primary,
   fontSize: '2rem',
   fontWeight: 'bold',
-});
+}));
 
 /**
  * A simple main Header.

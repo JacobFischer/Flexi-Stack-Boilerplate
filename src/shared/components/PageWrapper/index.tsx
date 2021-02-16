@@ -9,6 +9,8 @@ const Wrapper = styled.div({
 });
 
 const Logo = styled.img({
+  top: '0.4rem',
+  position: 'relative',
   width: '2rem',
   height: '2rem',
 });
